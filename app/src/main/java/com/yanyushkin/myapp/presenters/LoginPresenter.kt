@@ -1,15 +1,18 @@
 package com.yanyushkin.myapp.presenters
 
 import com.google.firebase.auth.FirebaseAuth
+import com.yanyushkin.myapp.App
 import com.yanyushkin.myapp.views.LoginView
+import javax.inject.Inject
 
 class LoginPresenter : Presenter {
 
-    private val mAuth: FirebaseAuth
+    @Inject
+    lateinit var mAuth: FirebaseAuth
     private lateinit var loginView: LoginView
 
     init {
-        mAuth = FirebaseAuth.getInstance()
+       App.component.injectsLoginPresenter(this)
     }
 
     /**
