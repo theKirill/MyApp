@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "233841638424-r1n2dhrc6moa33j1niu570ggppm8tarf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yanyushkin.myapp",
+            "certificate_hash": "93afa378ae7802628719eb024c9058066b28cd3e"
+          }
+        },
+        {
           "client_id": "233841638424-7ee4f0e83niouj181pk7l6fonvgbo1f8.apps.googleusercontent.com",
           "client_type": 3
         }

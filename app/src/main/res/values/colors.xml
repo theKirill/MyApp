@@ -2,7 +2,17 @@
 <resources>
     <color name="colorPrimary">#FFCF48</color>
     <color name="colorPrimaryDark">#FFCF48</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#FFCF48</color>
+    <color name="colorBackgroundBottom">#FFFFFF</color>
+    <color name="colorCountBackground">#FFCF48</color>
+    <color name="colorBottomDefaultIcon">#90A4AE</color>
+    <color name="colorSelectedIcon">#FFCF48</color>
+    <color name="colorSpinningBarColor">#FFCF48</color>
+    <color name="colorTextButton">#FFCF48</color>
+    <color name="colorCompleteProgress">#FFCF48</color>
+    <color name="colorSolid">#FFFFFF</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGray">#90A4AE</color>
+    <color name="colorOk">#2EC82A</color>
+    <color name="colorError">#C82414</color>
 </resources>

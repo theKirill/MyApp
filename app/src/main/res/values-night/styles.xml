@@ -8,28 +8,19 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="MainTextView" parent="Theme.AppCompat.Light">
+    <style name="MainTextView" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorGray</item>
         <item name="android:textSize">36sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/pacifico</item>
     </style>
 
-    <style name="MainButton" parent="Theme.AppCompat.Light">
+    <style name="MainButton" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
     </style>
-
-    <style name="MainEditText" parent="Theme.AppCompat.Light">
-        <!-- Customize your theme here. -->
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
 </resources>

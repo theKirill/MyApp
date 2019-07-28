@@ -1,5 +1,6 @@
 package com.yanyushkin.myapp
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
@@ -15,7 +16,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         initBottomNavigation()
     }
 
@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setOnClickMenuListener {
             when (it.id){
                 ID_NOTIFICATIONS->bottomNavigation.setCount(ID_NOTIFICATIONS, "")
+                ID_SETTINGS -> supportFragmentManager.beginTransaction()
+                    .replace(R.id.content_layout, LoginFragment.newInstance()).commit()
             }
         }
     }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2D2D2D</color>
+    <color name="colorPrimaryDark">#2D2D2D</color>
+    <color name="colorAccent">#2D2D2D</color>
+    <color name="colorBackgroundBottom">#2D2D2D</color>
+    <color name="colorCountBackground">#90A4AE</color>
+    <color name="colorBottomDefaultIcon">#90A4AE</color>
+    <color name="colorSelectedIcon">#FFFFFF</color>
+    <color name="colorSpinningBarColor">#FFFFFF</color>
+    <color name="colorTextButton">#FFFFFF</color>
+    <color name="colorCompleteProgress">#90A4AE</color>
+    <color name="colorSolid">#90A4AE</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGray">#90A4AE</color>
+    <color name="colorOk">#2EC82A</color>
+    <color name="colorError">#C82414</color>
+</resources>
