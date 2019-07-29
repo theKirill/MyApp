@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/photo_iv"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/ic_user_photo"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="8dp"/>
+
+    <TextView
+            android:id="@+id/name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/OtherTextView"
+            tools:text="Кирилл Янюшкин"
+            android:layout_toEndOf="@+id/photo_iv"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_alignParentTop="true"/>
+
+    <TextView
+            android:id="@+id/email_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="k.a.yanushkin@gmail.com"
+            android:layout_toEndOf="@+id/photo_iv"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/name_tv"/>
+
+</RelativeLayout>

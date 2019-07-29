@@ -2,9 +2,17 @@
     <string name="app_name">MyApp</string>
     <string name="login_text">Вход</string>
     <string name="login_btn">Войти</string>
+    <string name="sign_text">Регистрация</string>
+    <string name="sign_btn">Зарегестрироваться</string>
     <string name="email_hint">Электронный адрес</string>
     <string name="password_hint">Пароль</string>
     <string name="forgot_password_btn">Забыли пароль?</string>
     <string name="info_password_toast">Пароль должен состоять более, чем из 6 символов!</string>
     <string name="error_login_toast">Введён неверный пароль или такой учётной записи не существует!</string>
+    <string name="themes_category_title_preference">Настройки темы</string>
+    <string name="auto_daynight_title_preference">Автоматическая смена темы дня/ночи</string>
+    <string name="auto_daynight_summary_preference">Тёмная тема включится автоматически ночью</string>
+    <string name="theme_title_preference">Выбор темы</string>
+    <string name="theme_summary_preference">Устанавливает тему для приложения</string>
+    <string name="dialog_message_preference">Выберите тему приложения</string>
 </resources>

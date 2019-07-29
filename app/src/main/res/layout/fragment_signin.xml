@@ -2,7 +2,7 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/login_layout"
+        android:id="@+id/sign_layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -10,20 +10,29 @@
         android:focusableInTouchMode="true">
 
     <TextView
-            android:id="@+id/login_tv"
+            android:id="@+id/sign_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             style="@style/MainTextView"
-            android:text="@string/login_text"
+            android:text="@string/sign_text"
             android:layout_marginTop="16dp"
             android:layout_alignParentTop="true"/>
 
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/photo_iv"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:srcCompat="@drawable/ic_adding_photo"
+            android:layout_above="@id/sign_email_et"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"/>
+
     <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/email_et"
+            android:id="@+id/sign_email_et"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_above="@+id/password_et"
+            android:layout_above="@+id/sign_password_et"
             android:hint="@string/email_hint"
             android:fontFamily="sans-serif"
             android:textSize="15sp"
@@ -42,18 +51,18 @@
             android:layout_alignParentEnd="true"/>
 
     <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/email_done_iv"
+            android:id="@+id/sign_email_done_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_done"
             android:visibility="gone"
-            android:layout_above="@+id/password_et"
+            android:layout_above="@+id/sign_password_et"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"/>
 
     <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/password_et"
+            android:id="@+id/sign_password_et"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_centerInParent="true"
@@ -74,7 +83,7 @@
             android:layout_alignParentEnd="true"/>
 
     <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/show_password_btn"
+            android:id="@+id/sign_show_password_btn"
             android:layout_width="24dp"
             android:layout_height="24dp"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -85,7 +94,7 @@
             android:layout_marginEnd="32dp"/>
 
     <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/password_done_iv"
+            android:id="@+id/sign_password_done_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_done"
@@ -95,27 +104,17 @@
             android:layout_marginEnd="32dp"/>
 
     <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-            android:id="@+id/login_btn"
+            android:id="@+id/sign_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/login_btn"
-            android:layout_below="@+id/password_et"
+            android:text="@string/sign_btn"
+            android:layout_below="@+id/sign_password_et"
             android:layout_centerHorizontal="true"
             style="@style/MainButton"
             android:background="@drawable/rounded_view"
             app:spinning_bar_width="4dp"
             app:spinning_bar_color="@color/colorSpinningBarColor"
             app:spinning_bar_padding="6dp"/>
-
-    <Button
-            android:id="@+id/forgot_password_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:textColor="@color/colorTextButton"
-            android:text="@string/forgot_password_btn"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/login_btn"/>
 
 </RelativeLayout>

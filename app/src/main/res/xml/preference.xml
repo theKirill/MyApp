@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+            android:title="@string/themes_category_title_preference">
+
+        <SwitchPreference
+                android:key="auto_daynight"
+                android:title="@string/auto_daynight_title_preference"
+                android:singleLineTitle="false"
+                android:summary="@string/auto_daynight_summary_preference"
+                android:icon="@drawable/ic_moon"/>
+
+        <ListPreference
+                android:key="theme"
+                android:title="@string/theme_title_preference"
+                android:summary="@string/theme_summary_preference"
+                android:defaultValue="Жёлтая"
+                android:entries="@array/themes"
+                android:entryValues="@array/themes2"
+                android:dialogMessage="@string/dialog_message_preference"
+                android:icon="@drawable/ic_color_themes"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

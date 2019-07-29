@@ -73,6 +73,8 @@ class LoginFragment : Fragment(), LoginView {
             R.color.colorCompleteProgress,
             getBitmap(activity as Context, R.drawable.ic_complete)
         )*/
+        fragmentManager!!.beginTransaction()
+            .replace(R.id.content_layout, SettingsFragment.instance).commit()
     }
 
     override fun onLogInError() {
@@ -117,10 +119,13 @@ class LoginFragment : Fragment(), LoginView {
 
     private fun initClickListenerForLoginButton() {
         login_btn.setOnClickListener {
-            login_layout.requestFocus()
+            fragmentManager!!.beginTransaction()
+                .replace(R.id.content_layout, SettingsFragment.instance).commit()
+
+            /*login_layout.requestFocus()
             hideKeyboard(activity)
 
-            loginPresenter.logIn(email_et.text.toString(), password_et.text.toString())
+            loginPresenter.logIn(email_et.text.toString(), password_et.text.toString())*/
         }
     }
 
@@ -174,6 +179,7 @@ class LoginFragment : Fragment(), LoginView {
         password_et.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 show_password_btn.show()
+                password_done_iv.hide()
             } else {
                 show_password_btn.hide()
 

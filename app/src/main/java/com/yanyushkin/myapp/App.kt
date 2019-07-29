@@ -20,7 +20,7 @@ class App : Application() {
         initComponent()
     }
 
-    private fun initDayNightTheme(): Unit = AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO)
+    private fun initDayNightTheme(): Unit = AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
     private fun initComponent() {
         component = DaggerAppComponent.builder()

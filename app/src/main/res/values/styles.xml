@@ -16,6 +16,13 @@
         <item name="android:fontFamily">@font/pacifico</item>
     </style>
 
+    <style name="OtherTextView" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">Roboto</item>
+    </style>
+
     <style name="MainButton" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/colorPrimary</item>
