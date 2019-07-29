@@ -3,6 +3,7 @@ package com.yanyushkin.myapp.presenters
 import com.google.firebase.auth.FirebaseAuth
 import com.yanyushkin.myapp.App
 import com.yanyushkin.myapp.views.LoginView
+import com.yanyushkin.myapp.views.View
 import javax.inject.Inject
 
 class LoginPresenter : Presenter {
@@ -18,8 +19,8 @@ class LoginPresenter : Presenter {
     /**
      * binding to view
      */
-    override fun attach(loginView: LoginView) {
-        this.loginView = loginView
+    override fun attach(view: View) {
+        this.loginView = view as LoginView
     }
 
     fun logIn(email: String, password: String) {
@@ -27,9 +28,9 @@ class LoginPresenter : Presenter {
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
             if (it.isSuccessful)
-                loginView.onLogInSuccessful()
+                loginView.onLoginSuccessful()
             else
-                loginView.onLogInError()
+                loginView.onLoginError()
         }
 
         /*fun createUser(email: String, password: String) {

@@ -3,8 +3,6 @@ package com.yanyushkin.myapp
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
@@ -68,9 +66,7 @@ class LoginFragment : Fragment(), LoginView {
         outState.putBoolean(ROTATION_KEY, rotate)
     }
 
-    override fun showProgress(): Unit = login_btn.startAnimation()
-
-    override fun onLogInSuccessful() {
+    override fun onLoginSuccessful() {
         /*login_btn.doneLoadingAnimation(
             R.color.colorCompleteProgress,
             getBitmap(activity as Context, R.drawable.ic_complete)
@@ -81,7 +77,7 @@ class LoginFragment : Fragment(), LoginView {
         Navigation.findNavController(activity as Activity, R.id.nav_host_fragment).navigate(R.id.settingsFragment)
     }
 
-    override fun onLogInError() {
+    override fun onLoginError() {
         /*login_btn.doneLoadingAnimation(
             R.color.colorCompleteProgress,
             getBitmap(activity as Context, R.drawable.ic_error_black)
@@ -89,6 +85,8 @@ class LoginFragment : Fragment(), LoginView {
 
         toast(activity as Context, getString(R.string.error_login_toast))
     }
+
+    override fun showProgress(): Unit = login_btn.startAnimation()
 
     private fun doAfterRotate(savedInstanceState: Bundle?) {
         savedInstanceState?.let {
@@ -115,8 +113,6 @@ class LoginFragment : Fragment(), LoginView {
 
     private fun initViewsOptions() {
         initClickListenerForLoginButton()
-        initTextChangeListenerForEmailET()
-        initTextChangeListenerForPassET()
         initFocusChangeListenerForPassET()
         initClickListenerForShowPassButton()
     }
@@ -136,71 +132,12 @@ class LoginFragment : Fragment(), LoginView {
         }
     }
 
-    private fun initTextChangeListenerForEmailET() {
-        email_et.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                if (isEmailValid(email_et.text.toString())) {
-                    email_done_iv.show()
-                    email_done_iv.setImageResource(R.drawable.ic_done)
-                    email_et.background = resources.getDrawable(R.drawable.ok_rounded_view, activity!!.theme)
-                    login_btn.isEnabled = isPasswordValid(password_et.text.toString())
-                } else {
-                    if (email_et.text!!.isEmpty()) {
-                        email_done_iv.hide()
-                        email_et.background = resources.getDrawable(R.drawable.rounded_view, activity!!.theme)
-                    } else {
-                        email_done_iv.show()
-                        email_done_iv.setImageResource(R.drawable.ic_error)
-                        email_et.background = resources.getDrawable(R.drawable.error_rounded_view, activity!!.theme)
-                    }
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
-    }
-
-    private fun initTextChangeListenerForPassET() {
-        password_et.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                if (isPasswordValid(password_et.text.toString())) {
-                    password_et.background = resources.getDrawable(R.drawable.ok_rounded_view, activity!!.theme)
-                    login_btn.isEnabled = isEmailValid(email_et.text.toString())
-                } else {
-                    if (password_et.text!!.isEmpty())
-                        password_et.background = resources.getDrawable(R.drawable.rounded_view, activity!!.theme)
-                    else
-                        password_et.background = resources.getDrawable(R.drawable.error_rounded_view, activity!!.theme)
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
-    }
-
     private fun initFocusChangeListenerForPassET() {
         password_et.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
+            if (hasFocus)
                 show_password_btn.show()
-                password_done_iv.hide()
-            } else {
+             else
                 show_password_btn.hide()
-
-                if (password_et.text!!.isNotEmpty()) {
-                    password_done_iv.show()
-
-                    if (isPasswordValid(password_et.text.toString())) {
-                        password_done_iv.setImageResource(R.drawable.ic_done)
-                    } else {
-                        password_done_iv.setImageResource(R.drawable.ic_error)
-                        //toast(activity as Context, resources.getString(R.string.info_password_toast))
-                    }
-                }
-            }
         }
     }
 
@@ -215,8 +152,4 @@ class LoginFragment : Fragment(), LoginView {
             }
         }
     }
-
-    private fun isEmailValid(email: String): Boolean = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-
-    private fun isPasswordValid(password: String): Boolean = password.length > 6
 }

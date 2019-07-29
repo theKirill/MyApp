@@ -19,15 +19,6 @@
             android:layout_marginTop="16dp"
             android:layout_alignParentTop="true"/>
 
-    <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/photo_iv"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:srcCompat="@drawable/ic_adding_photo"
-            android:layout_above="@id/sign_email_et"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="8dp"/>
-
     <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/sign_email_et"
             android:layout_width="match_parent"
@@ -103,18 +94,15 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="32dp"/>
 
-    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-            android:id="@+id/sign_btn"
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/next_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/sign_btn"
+            android:text="@string/next_btn"
             android:layout_below="@+id/sign_password_et"
             android:layout_centerHorizontal="true"
             style="@style/MainButton"
-            android:background="@drawable/rounded_view"
-            app:spinning_bar_width="4dp"
-            app:spinning_bar_color="@color/colorSpinningBarColor"
-            app:spinning_bar_padding="6dp"/>
+            android:background="@drawable/rounded_view"/>
 
 </RelativeLayout>

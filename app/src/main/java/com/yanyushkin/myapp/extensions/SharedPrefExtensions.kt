@@ -6,8 +6,11 @@ import android.content.SharedPreferences
 private const val APP_PREFERENCES_KEY = "settings"
 
 /**
- * for work with shared preferences
+ * Для работы с SharedPref
  */
 fun Context.getPreferences(): SharedPreferences = getSharedPreferences(APP_PREFERENCES_KEY, Context.MODE_PRIVATE)
 
+/**
+ * Берём из настроек информацию об автоматическом включении темы дня/ночи
+ */
 fun SharedPreferences.getAutoDayNight(): Boolean = getBoolean("auto_daynight", true)

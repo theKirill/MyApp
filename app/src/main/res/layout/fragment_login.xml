@@ -41,17 +41,6 @@
             android:layout_marginBottom="8dp"
             android:layout_alignParentEnd="true"/>
 
-    <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/email_done_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_done"
-            android:visibility="gone"
-            android:layout_above="@+id/password_et"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"/>
-
     <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/password_et"
             android:layout_width="match_parent"
@@ -79,16 +68,6 @@
             android:layout_height="24dp"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             app:srcCompat="@drawable/ic_eye"
-            android:visibility="gone"
-            android:layout_centerInParent="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="32dp"/>
-
-    <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/password_done_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_done"
             android:visibility="gone"
             android:layout_centerInParent="true"
             android:layout_alignParentEnd="true"

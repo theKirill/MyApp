@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/main_graph" app:startDestination="@id/loginFragment">
+            android:id="@+id/main_graph" app:startDestination="@id/signInPart1Fragment">
 
     <fragment android:id="@+id/loginFragment" android:name="com.yanyushkin.myapp.LoginFragment"
               android:label="LoginFragment">
@@ -10,4 +10,19 @@
     </fragment>
     <fragment android:id="@+id/settingsFragment" android:name="com.yanyushkin.myapp.SettingsFragment"
               android:label="SettingsFragment"/>
+    <fragment android:id="@+id/signInPart1Fragment" android:name="com.yanyushkin.myapp.SignInPart1Fragment"
+              android:label="SignInPart1Fragment">
+        <action android:id="@+id/action_signInPart1Fragment_to_signInPart2Fragment"
+                app:destination="@id/signInPart2Fragment" app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_in_left"/>
+        <action android:id="@+id/action_signInPart1Fragment_to_settingsFragment"
+                app:destination="@id/settingsFragment" app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_in_left"/>
+    </fragment>
+    <fragment android:id="@+id/signInPart2Fragment" android:name="com.yanyushkin.myapp.SignInPart2Fragment"
+              android:label="SignInPart2Fragment">
+        <action android:id="@+id/action_signInPart2Fragment_to_settingsFragment"
+                app:destination="@id/settingsFragment" app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"/>
+    </fragment>
 </navigation>

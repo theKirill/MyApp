@@ -1,8 +1,8 @@
 package com.yanyushkin.myapp.views
 
-interface LoginView : View{
+interface LoginView : View {
 
-    fun onLogInSuccessful()
+    fun onLoginSuccessful()
 
-    fun onLogInError()
+    fun onLoginError()
 }
