@@ -6,6 +6,8 @@ import com.yanyushkin.myapp.di.AppComponent
 import com.yanyushkin.myapp.di.DaggerAppComponent
 import com.yanyushkin.myapp.di.FirebaseModule
 import com.yanyushkin.myapp.di.PresentersModule
+import com.yanyushkin.myapp.extensions.getAutoDayNight
+import com.yanyushkin.myapp.extensions.getPreferences
 
 class App : Application() {
 
@@ -20,7 +22,12 @@ class App : Application() {
         initComponent()
     }
 
-    private fun initDayNightTheme(): Unit = AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+    private fun initDayNightTheme() {
+        if (applicationContext.getPreferences().getAutoDayNight())
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO)
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+    }
 
     private fun initComponent() {
         component = DaggerAppComponent.builder()

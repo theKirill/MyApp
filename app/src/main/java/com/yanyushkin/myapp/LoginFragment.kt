@@ -1,5 +1,6 @@
 package com.yanyushkin.myapp
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -10,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.yanyushkin.myapp.extensions.*
 import com.yanyushkin.myapp.presenters.LoginPresenter
 import com.yanyushkin.myapp.views.LoginView
@@ -73,8 +75,10 @@ class LoginFragment : Fragment(), LoginView {
             R.color.colorCompleteProgress,
             getBitmap(activity as Context, R.drawable.ic_complete)
         )*/
-        fragmentManager!!.beginTransaction()
-            .replace(R.id.content_layout, SettingsFragment.instance).commit()
+        /*fragmentManager!!.beginTransaction()
+            .replace(R.id.content_layout, SettingsFragment.instance).commit()*/
+
+        Navigation.findNavController(activity as Activity, R.id.nav_host_fragment).navigate(R.id.settingsFragment)
     }
 
     override fun onLogInError() {
@@ -119,8 +123,11 @@ class LoginFragment : Fragment(), LoginView {
 
     private fun initClickListenerForLoginButton() {
         login_btn.setOnClickListener {
-            fragmentManager!!.beginTransaction()
-                .replace(R.id.content_layout, SettingsFragment.instance).commit()
+            hideKeyboard(activity)
+            login_layout.requestFocus()
+            Navigation.findNavController(activity as Activity, R.id.nav_host_fragment).navigate(R.id.action_loginFragment_to_settingsFragment)
+           /* fragmentManager!!.beginTransaction()
+                .replace(R.id.content_layout, SettingsFragment.instance).commit()*/
 
             /*login_layout.requestFocus()
             hideKeyboard(activity)
