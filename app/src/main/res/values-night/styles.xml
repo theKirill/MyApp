@@ -16,7 +16,7 @@
         <item name="android:fontFamily">@font/pacifico</item>
     </style>
 
-    <style name="OtherTextView" parent="Theme.AppCompat.Light">
+    <style name="OtherTextView" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
@@ -30,4 +30,18 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
     </style>
+
+    <style name="BorderlessButton" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/colorTextButton</item>
+    </style>
+
+    <style name="MainEditText" parent="Theme.AppCompat">
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
 </resources>

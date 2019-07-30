@@ -84,15 +84,14 @@
             style="@style/MainButton"
             android:background="@drawable/rounded_view"
             app:spinning_bar_width="4dp"
-            app:spinning_bar_color="@color/colorSpinningBarColor"
+            app:spinning_bar_color="@color/colorSpinningBar"
             app:spinning_bar_padding="6dp"/>
 
     <Button
             android:id="@+id/forgot_password_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:textColor="@color/colorTextButton"
+            style="@style/BorderlessButton"
             android:text="@string/forgot_password_btn"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/login_btn"/>

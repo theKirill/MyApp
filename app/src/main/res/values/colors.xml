@@ -7,7 +7,7 @@
     <color name="colorCountBackground">#FFCF48</color>
     <color name="colorBottomDefaultIcon">#90A4AE</color>
     <color name="colorSelectedIcon">#FFCF48</color>
-    <color name="colorSpinningBarColor">#FFCF48</color>
+    <color name="colorSpinningBar">#FFCF48</color>
     <color name="colorTextButton">#FFCF48</color>
     <color name="colorCompleteProgress">#FFCF48</color>
     <color name="colorSolid">#FFFFFF</color>

@@ -69,7 +69,7 @@ class SignInPart1Fragment : Fragment(), SignInPart1View {
     }
 
     override fun showNextPage() : Unit =
-        Navigation.findNavController(activity as Activity, R.id.nav_host_fragment).navigate(R.id.action_signInPart1Fragment_to_settingsFragment)
+        Navigation.findNavController(activity as Activity, R.id.sign_nav_host_fragment).navigate(R.id.action_signInPart1Fragment_to_signInPart2Fragment)
 
     private fun doAfterRotate(savedInstanceState: Bundle?) {
         savedInstanceState?.let {
@@ -105,7 +105,7 @@ class SignInPart1Fragment : Fragment(), SignInPart1View {
     private fun initClickListenerForNextButton() {
         next_btn.setOnClickListener {
             sign_layout.requestFocus()
-            hideKeyboard(activity)
+            hideKeyboard(activity, next_btn)
 
             signInPresenter.signInNext()
         }
@@ -182,10 +182,10 @@ class SignInPart1Fragment : Fragment(), SignInPart1View {
     private fun initClickListenerForShowPassButton() {
         sign_show_password_btn.setOnClickListener {
             if (!isVisiblePassword) {
-                sign_password_et.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                sign_password_et.showPassword()
                 isVisiblePassword = true
             } else {
-                sign_password_et.transformationMethod = PasswordTransformationMethod.getInstance()
+                sign_password_et.hidePassword()
                 isVisiblePassword = false
             }
         }

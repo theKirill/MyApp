@@ -1,28 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/main_graph" app:startDestination="@id/signInPart1Fragment">
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/main_graph" app:startDestination="@id/settingsFragment">
 
-    <fragment android:id="@+id/loginFragment" android:name="com.yanyushkin.myapp.LoginFragment"
-              android:label="LoginFragment">
-        <action android:id="@+id/action_loginFragment_to_settingsFragment" app:destination="@id/settingsFragment"
+    <fragment android:id="@+id/settingsFragment" android:name="com.yanyushkin.myapp.SettingsFragment"
+              android:label="SettingsFragment">
+        <action android:id="@+id/action_settingsFragment_to_signInActivity" app:destination="@id/signInActivity"
+                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"/>
+        <action android:id="@+id/action_settingsFragment_to_loginActivity" app:destination="@id/loginActivity"
                 app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"/>
     </fragment>
-    <fragment android:id="@+id/settingsFragment" android:name="com.yanyushkin.myapp.SettingsFragment"
-              android:label="SettingsFragment"/>
-    <fragment android:id="@+id/signInPart1Fragment" android:name="com.yanyushkin.myapp.SignInPart1Fragment"
-              android:label="SignInPart1Fragment">
-        <action android:id="@+id/action_signInPart1Fragment_to_signInPart2Fragment"
-                app:destination="@id/signInPart2Fragment" app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/slide_in_left"/>
-        <action android:id="@+id/action_signInPart1Fragment_to_settingsFragment"
-                app:destination="@id/settingsFragment" app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/slide_in_left"/>
-    </fragment>
-    <fragment android:id="@+id/signInPart2Fragment" android:name="com.yanyushkin.myapp.SignInPart2Fragment"
-              android:label="SignInPart2Fragment">
-        <action android:id="@+id/action_signInPart2Fragment_to_settingsFragment"
-                app:destination="@id/settingsFragment" app:enterAnim="@anim/nav_default_enter_anim"
-                app:exitAnim="@anim/nav_default_exit_anim"/>
-    </fragment>
+    <activity android:id="@+id/signInActivity" android:name="com.yanyushkin.myapp.SignInActivity"
+              android:label="activity_signin" tools:layout="@layout/activity_signin"/>
+    <activity android:id="@+id/loginActivity" android:name="com.yanyushkin.myapp.LoginActivity"
+              android:label="activity_login" tools:layout="@layout/activity_login"/>
 </navigation>

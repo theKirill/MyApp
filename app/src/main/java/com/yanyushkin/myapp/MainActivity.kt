@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private val SELECTED_TAB_KEY = "selected_tab"
-    private var selectedTab = 1
+    private var selectedTab = 4
 
     /**
      * ID вкладок нижней навигации
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                 if (containsKey(SELECTED_TAB_KEY)) {
                     selectedTab = getInt(SELECTED_TAB_KEY)
 
-                    showTab(selectedTab)
+                    bottomNavigation.show(selectedTab)
 
                     clear()
                 }
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.add(MeowBottomNavigation.Model(ID_NOTIFICATIONS, R.drawable.ic_notifications))
         bottomNavigation.add(MeowBottomNavigation.Model(ID_SETTINGS, R.drawable.ic_settings))
         bottomNavigation.setCount(ID_NOTIFICATIONS, "10")
-        //bottomNavigation.show(selectedTab)
+        bottomNavigation.show(selectedTab)
 
         initClickListenerForBottomNavigation()
     }
@@ -80,6 +80,5 @@ class MainActivity : AppCompatActivity() {
            /* ID_SETTINGS -> supportFragmentManager.beginTransaction()
                 .replace(R.id.content_layout, LoginFragment.instance).commit()*/
         }
-        bottomNavigation.show(selectedTab)
     }
 }

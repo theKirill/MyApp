@@ -71,10 +71,11 @@ class LoginFragment : Fragment(), LoginView {
             R.color.colorCompleteProgress,
             getBitmap(activity as Context, R.drawable.ic_complete)
         )*/
-        /*fragmentManager!!.beginTransaction()
-            .replace(R.id.content_layout, SettingsFragment.instance).commit()*/
 
-        Navigation.findNavController(activity as Activity, R.id.nav_host_fragment).navigate(R.id.settingsFragment)
+        Navigation.findNavController(activity as Activity, R.id.login_nav_host_fragment)
+            .navigate(R.id.action_loginFragment_to_mainActivity)
+
+        toast(activity as Context, getString(R.string.welcome_toast))
     }
 
     override fun onLoginError() {
@@ -101,7 +102,6 @@ class LoginFragment : Fragment(), LoginView {
 
     private fun initAnimationForViews(views: ArrayList<View>) {
         var startOffset: Long = 0
-        login_btn.isEnabled = false
 
         views.forEach {
             it.animate(activity as Context, startOffset)
@@ -119,16 +119,17 @@ class LoginFragment : Fragment(), LoginView {
 
     private fun initClickListenerForLoginButton() {
         login_btn.setOnClickListener {
-            hideKeyboard(activity)
+            hideKeyboard(activity, login_btn)
             login_layout.requestFocus()
-            Navigation.findNavController(activity as Activity, R.id.nav_host_fragment).navigate(R.id.action_loginFragment_to_settingsFragment)
-           /* fragmentManager!!.beginTransaction()
-                .replace(R.id.content_layout, SettingsFragment.instance).commit()*/
+            loginPresenter.logIn(email_et.text.toString(), password_et.text.toString())
+            //Navigation.findNavController(activity as Activity, R.id.auth_nav_host_fragment).navigate(R.id.action_loginFragment_to_settingsFragment)
+            /* fragmentManager!!.beginTransaction()
+                 .replace(R.id.content_layout, SettingsFragment.instance).commit()*/
 
             /*login_layout.requestFocus()
             hideKeyboard(activity)
 
-            loginPresenter.logIn(email_et.text.toString(), password_et.text.toString())*/
+            */
         }
     }
 
@@ -136,7 +137,7 @@ class LoginFragment : Fragment(), LoginView {
         password_et.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus)
                 show_password_btn.show()
-             else
+            else
                 show_password_btn.hide()
         }
     }
@@ -144,10 +145,10 @@ class LoginFragment : Fragment(), LoginView {
     private fun initClickListenerForShowPassButton() {
         show_password_btn.setOnClickListener {
             if (!isVisiblePassword) {
-                password_et.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                password_et.showPassword()
                 isVisiblePassword = true
             } else {
-                password_et.transformationMethod = PasswordTransformationMethod.getInstance()
+                password_et.hidePassword()
                 isVisiblePassword = false
             }
         }

@@ -64,14 +64,17 @@ class SignInPart2Fragment : Fragment(), SignInPart2View {
     }
 
     override fun onSignInSuccessful() {
+        Navigation.findNavController(activity as Activity, R.id.sign_nav_host_fragment)
+            .navigate(R.id.action_signInPart2Fragment_to_mainActivity2)
 
+        toast(activity as Context, getString(R.string.welcome_toast))
     }
 
     override fun onSignInError() {
-
+        toast(activity as Context, getString(R.string.error_sign_toast))
     }
 
-    override fun showProgress() : Unit =  sign_btn.startAnimation()
+    override fun showProgress(): Unit = sign_btn.startAnimation()
 
     private fun doAfterRotate(savedInstanceState: Bundle?) {
         savedInstanceState?.let {
@@ -98,9 +101,9 @@ class SignInPart2Fragment : Fragment(), SignInPart2View {
     private fun initClickListenerForOkButton() {
         sign_btn.setOnClickListener {
             sign_part2_layout.requestFocus()
-            hideKeyboard(activity)
+            hideKeyboard(activity, sign_btn)
 
-            signInPresenter.signIn("", "")
+            signInPresenter.signIn("k.a.yan@icloud.com", "1234567")
         }
     }
 }

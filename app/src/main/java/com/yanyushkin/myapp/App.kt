@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate
 import com.yanyushkin.myapp.di.AppComponent
 import com.yanyushkin.myapp.di.DaggerAppComponent
-import com.yanyushkin.myapp.di.FirebaseModule
 import com.yanyushkin.myapp.di.PresentersModule
 import com.yanyushkin.myapp.extensions.getAutoDayNight
 import com.yanyushkin.myapp.extensions.getPreferences
@@ -31,7 +30,6 @@ class App : Application() {
 
     private fun initComponent() {
         component = DaggerAppComponent.builder()
-            .firebaseModule(FirebaseModule())
             .presentersModule(PresentersModule())
             .build()
     }

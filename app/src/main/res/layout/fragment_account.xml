@@ -1,40 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/photo_iv"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:src="@drawable/ic_user_photo"
-            android:layout_marginTop="8dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="8dp"/>
+    <RelativeLayout
+            android:id="@+id/no_account_layout"
+            android:layout_width="match_parent"
+            android:layout_height="83dp">
 
-    <TextView
-            android:id="@+id/name_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/OtherTextView"
-            tools:text="Кирилл Янюшкин"
-            android:layout_toEndOf="@+id/photo_iv"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_alignParentTop="true"/>
+        <TextView
+                android:id="@+id/no_account_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/OtherTextView"
+                android:text="@string/no_account_text"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:layout_alignParentTop="true"/>
 
-    <TextView
-            android:id="@+id/email_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="k.a.yanushkin@gmail.com"
-            android:layout_toEndOf="@+id/photo_iv"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_below="@+id/name_tv"/>
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/no_account_tv"
+                android:layout_centerHorizontal="true">
 
-</RelativeLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/main_login_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_btn"
+                    style="@style/BorderlessButton"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/main_sign_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_btn"
+                    style="@style/BorderlessButton"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/account_layout"
+            android:layout_width="match_parent"
+            android:layout_height="83dp"
+            android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/photo_iv"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/ic_user_photo"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="8dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="8dp"/>
+
+        <TextView
+                android:id="@+id/name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/OtherTextView"
+                tools:text="Кирилл Янюшкин"
+                android:layout_toEndOf="@+id/photo_iv"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_alignParentTop="true"/>
+
+        <TextView
+                android:id="@+id/email_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="k.a.yanushkin@gmail.com"
+                android:layout_toEndOf="@+id/photo_iv"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/name_tv"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/about_button"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/ic_navigate_next"
+                android:background="@color/colorWhite"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="8dp"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

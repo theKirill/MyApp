@@ -31,6 +31,11 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="BorderlessButton" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/colorTextButton</item>
+    </style>
+
     <style name="MainEditText" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/colorPrimary</item>

@@ -40,7 +40,7 @@
             android:textStyle="normal"
             android:paddingStart="16dp"
             android:background="@drawable/rounded_view"
-            android:inputType="textPassword"
+            android:inputType="text"
             android:imeOptions="actionDone"
             android:layout_alignParentStart="true"
             android:layout_marginLeft="16dp"
@@ -52,13 +52,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/sign_btn"
+            android:text="@string/ok_btn"
             android:layout_below="@+id/sign_name_et"
             android:layout_centerHorizontal="true"
             style="@style/MainButton"
             android:background="@drawable/rounded_view"
             app:spinning_bar_width="4dp"
-            app:spinning_bar_color="@color/colorSpinningBarColor"
+            app:spinning_bar_color="@color/colorSpinningBar"
             app:spinning_bar_padding="6dp"/>
 
 </RelativeLayout>
