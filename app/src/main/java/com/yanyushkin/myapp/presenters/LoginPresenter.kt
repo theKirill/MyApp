@@ -11,10 +11,6 @@ class LoginPresenter : Presenter {
 
     private lateinit var loginView: LoginView
 
-    init {
-       App.component.injectsLoginPresenter(this)
-    }
-
     /**
      * binding to view
      */

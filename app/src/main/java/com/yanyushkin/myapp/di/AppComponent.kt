@@ -12,13 +12,9 @@ import javax.inject.Singleton
 @Component(modules = [PresentersModule::class])
 interface AppComponent {
 
-    fun injectsLoginPresenter(loginPresenter: LoginPresenter)
-
     fun injectsLoginFragment(loginFragment: LoginFragment)
 
     fun injectsSignInPart1Fragment(signInPart1Fragment: SignInPart1Fragment)
-
-    fun injectsSignInPart2Presenter(signInPart2Presenter: SignInPart2Presenter)
 
     fun injectsSignInPart2Fragment(signInPart2Fragment: SignInPart2Fragment)
 }
