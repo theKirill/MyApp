@@ -5,8 +5,6 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,14 +12,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.yanyushkin.myapp.extensions.*
 import com.yanyushkin.myapp.presenters.SignInPart1Presenter
-import com.yanyushkin.myapp.views.SignInPart1View
+import com.yanyushkin.myapp.views.SignInView
 import kotlinx.android.synthetic.main.fragment_signin.*
 import javax.inject.Inject
 
 /**
  * Фрагмент для ввода почты/пароля
  */
-class SignInPart1Fragment : Fragment(), SignInPart1View {
+class SignInPart1Fragment : Fragment(), SignInView {
 
     private object Holder {
         val INSTANCE = SignInPart1Fragment()
@@ -68,8 +66,13 @@ class SignInPart1Fragment : Fragment(), SignInPart1View {
         outState.putBoolean(ROTATION_KEY, rotate)
     }
 
-    override fun showNextPage() : Unit =
-        Navigation.findNavController(activity as Activity, R.id.sign_nav_host_fragment).navigate(R.id.action_signInPart1Fragment_to_signInPart2Fragment)
+    override fun onSignInSuccessful(): Unit =
+        Navigation.findNavController(activity as Activity, R.id.sign_nav_host_fragment)
+            .navigate(R.id.action_signInPart1Fragment_to_signInPart2Fragment)
+
+    override fun onSignInError(): Unit = toast(activity as Context, getString(R.string.error_sign_message))
+
+    override fun showProgress(): Unit = next_btn.startAnimation()
 
     private fun doAfterRotate(savedInstanceState: Bundle?) {
         savedInstanceState?.let {
@@ -84,7 +87,7 @@ class SignInPart1Fragment : Fragment(), SignInPart1View {
 
     private fun initAnimationForViews(views: ArrayList<View>) {
         var startOffset: Long = 0
-       next_btn.isEnabled = false
+        next_btn.isEnabled = false
 
         views.forEach {
             it.animate(activity as Context, startOffset)
@@ -107,7 +110,7 @@ class SignInPart1Fragment : Fragment(), SignInPart1View {
             sign_layout.requestFocus()
             hideKeyboard(activity, next_btn)
 
-            signInPresenter.signInNext()
+            signInPresenter.signIn(sign_email_et.text.toString(), sign_password_et.text.toString())
         }
     }
 
@@ -126,7 +129,8 @@ class SignInPart1Fragment : Fragment(), SignInPart1View {
                     } else {
                         sign_email_done_iv.show()
                         sign_email_done_iv.setImageResource(R.drawable.ic_error)
-                        sign_email_et.background = resources.getDrawable(R.drawable.error_rounded_view, activity!!.theme)
+                        sign_email_et.background =
+                            resources.getDrawable(R.drawable.error_rounded_view, activity!!.theme)
                     }
                 }
             }
@@ -147,7 +151,8 @@ class SignInPart1Fragment : Fragment(), SignInPart1View {
                     if (sign_password_et.text!!.isEmpty())
                         sign_password_et.background = resources.getDrawable(R.drawable.rounded_view, activity!!.theme)
                     else
-                        sign_password_et.background = resources.getDrawable(R.drawable.error_rounded_view, activity!!.theme)
+                        sign_password_et.background =
+                            resources.getDrawable(R.drawable.error_rounded_view, activity!!.theme)
                 }
             }
 
@@ -172,7 +177,7 @@ class SignInPart1Fragment : Fragment(), SignInPart1View {
                         sign_password_done_iv.setImageResource(R.drawable.ic_done)
                     } else {
                         sign_password_done_iv.setImageResource(R.drawable.ic_error)
-                        //toast(activity as Context, resources.getString(R.string.info_password_toast))
+                        toast(activity as Context, resources.getString(R.string.info_password_message))
                     }
                 }
             }

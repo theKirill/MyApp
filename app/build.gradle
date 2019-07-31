@@ -6,8 +6,6 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
-apply plugin: 'androidx.navigation.safeargs'
-
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -35,6 +33,9 @@ dependencies {
     implementation 'com.etebarian:meow-bottom-navigation:1.0.4'
     implementation 'br.com.simplepass:loading-button-android:2.1.5'
     implementation "com.google.android.material:material:1.0.0"
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+    implementation 'info.hoang8f:android-segmented:1.0.6'
+
     implementation "org.jetbrains.anko:anko-common:0.10.4"
 
     implementation 'com.google.firebase:firebase-core:17.0.1'

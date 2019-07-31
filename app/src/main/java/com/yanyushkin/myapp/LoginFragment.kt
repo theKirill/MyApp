@@ -75,7 +75,7 @@ class LoginFragment : Fragment(), LoginView {
         Navigation.findNavController(activity as Activity, R.id.login_nav_host_fragment)
             .navigate(R.id.action_loginFragment_to_mainActivity)
 
-        toast(activity as Context, getString(R.string.welcome_toast))
+        toast(activity as Context, getString(R.string.welcome_message))
     }
 
     override fun onLoginError() {
@@ -84,7 +84,7 @@ class LoginFragment : Fragment(), LoginView {
             getBitmap(activity as Context, R.drawable.ic_error_black)
         )*/
 
-        toast(activity as Context, getString(R.string.error_login_toast))
+        toast(activity as Context, getString(R.string.error_login_message))
     }
 
     override fun showProgress(): Unit = login_btn.startAnimation()

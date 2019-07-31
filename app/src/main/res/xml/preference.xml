@@ -23,4 +23,15 @@
                 android:icon="@drawable/ic_color_themes"/>
     </PreferenceCategory>
 
+    <PreferenceCategory
+            android:title="@string/other_category_title_preference">
+
+        <SwitchPreference
+                android:key="push"
+                android:title="@string/push_title_preference"
+                android:icon="@drawable/ic_push"
+                android:defaultValue="true"/>
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

@@ -16,7 +16,7 @@
             android:layout_centerHorizontal="true"
             style="@style/MainTextView"
             android:text="@string/sign_text"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_alignParentTop="true"/>
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -94,7 +94,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="32dp"/>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/next_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,6 +103,9 @@
             android:layout_below="@+id/sign_password_et"
             android:layout_centerHorizontal="true"
             style="@style/MainButton"
-            android:background="@drawable/rounded_view"/>
+            android:background="@drawable/rounded_view"
+            app:spinning_bar_width="2dp"
+            app:spinning_bar_color="@color/colorSpinningBar"
+            app:spinning_bar_padding="6dp"/>
 
 </RelativeLayout>

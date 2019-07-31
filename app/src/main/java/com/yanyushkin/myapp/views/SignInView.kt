@@ -1,6 +1,6 @@
 package com.yanyushkin.myapp.views
 
-interface SignInPart2View : View {
+interface SignInView : View {
 
     fun onSignInSuccessful()
 

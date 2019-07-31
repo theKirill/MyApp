@@ -1,6 +1,5 @@
 package com.yanyushkin.myapp
 
-import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation

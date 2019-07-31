@@ -3,12 +3,12 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
             android:id="@+id/no_account_layout"
             android:layout_width="match_parent"
-            android:layout_height="83dp">
+            android:layout_height="91dp">
 
         <TextView
                 android:id="@+id/no_account_tv"
@@ -24,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/no_account_tv"
+                android:layout_marginTop="8dp"
                 android:layout_centerHorizontal="true">
 
             <androidx.appcompat.widget.AppCompatButton
@@ -42,16 +43,15 @@
 
         </LinearLayout>
 
-
     </RelativeLayout>
 
     <RelativeLayout
             android:id="@+id/account_layout"
             android:layout_width="match_parent"
-            android:layout_height="83dp"
+            android:layout_height="91dp"
             android:visibility="gone">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/photo_iv"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
@@ -60,7 +60,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="8dp"/>
+                android:layout_marginStart="16dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="8dp"
+                app:civ_border_width="3dp"
+                app:civ_border_color="@color/colorPrimary"/>
 
         <TextView
                 android:id="@+id/name_tv"
@@ -68,6 +72,7 @@
                 android:layout_height="wrap_content"
                 style="@style/OtherTextView"
                 tools:text="Кирилл Янюшкин"
+                android:maxLines="1"
                 android:layout_toEndOf="@+id/photo_iv"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
@@ -83,12 +88,11 @@
                 android:layout_marginTop="8dp"
                 android:layout_below="@+id/name_tv"/>
 
-        <androidx.appcompat.widget.AppCompatImageButton
+        <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/about_button"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/ic_navigate_next"
-                android:background="@color/colorWhite"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="8dp"/>

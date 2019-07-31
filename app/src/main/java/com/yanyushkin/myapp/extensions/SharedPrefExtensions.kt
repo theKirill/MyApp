@@ -13,4 +13,4 @@ fun Context.getPreferences(): SharedPreferences = getSharedPreferences(APP_PREFE
 /**
  * Берём из настроек информацию об автоматическом включении темы дня/ночи
  */
-fun SharedPreferences.getAutoDayNight(): Boolean = getBoolean("auto_daynight", true)
+fun SharedPreferences.getAutoDayNight(): Boolean = getBoolean("auto_daynight", false)

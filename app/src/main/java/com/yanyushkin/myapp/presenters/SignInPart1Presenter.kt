@@ -1,17 +1,28 @@
 package com.yanyushkin.myapp.presenters
 
-import com.yanyushkin.myapp.views.SignInPart1View
+import com.yanyushkin.myapp.Firebase
+import com.yanyushkin.myapp.views.SignInView
+import com.yanyushkin.myapp.views.View
 
-class SignInPart1Presenter {
+class SignInPart1Presenter : Presenter {
 
-    private lateinit var signInView: SignInPart1View
+    private lateinit var signInView: SignInView
 
     /**
      * binding to view
      */
-    fun attach(signInViewPart1: SignInPart1View) {
-        this.signInView = signInViewPart1
+    override fun attach(view: View) {
+        this.signInView = view as SignInView
     }
 
-    fun signInNext(): Unit = signInView.showNextPage()
+    fun signIn(email: String, password: String) {
+        signInView.showProgress()
+
+        Firebase.mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+            if (it.isSuccessful)
+                signInView.onSignInSuccessful()
+            else
+                signInView.onSignInError()
+        }
+    }
 }
