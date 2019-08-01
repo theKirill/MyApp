@@ -27,4 +27,7 @@
     <string name="no_account_text">Вы не вошли в аккаунт</string>
     <string name="male_rbtn">М</string>
     <string name="female_rbtn">Ж</string>
+    <string name="change_photo_btn">Сменить фото профиля</string>
+    <string name="change_password_btn">Сменить пароль</string>
+    <string name="logout_btn">Выйти</string>
 </resources>

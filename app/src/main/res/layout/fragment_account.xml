@@ -89,7 +89,7 @@
                 android:layout_below="@+id/name_tv"/>
 
         <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/about_button"
+                android:id="@+id/about_iv"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_navigate_next"

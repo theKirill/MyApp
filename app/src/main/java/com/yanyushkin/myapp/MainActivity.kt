@@ -73,11 +73,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showTab(id: Int){
+    private fun showTab(id: Int) {
         when (id) {
             ID_NOTIFICATIONS -> bottomNavigation.setCount(ID_NOTIFICATIONS, "")
-           /* ID_SETTINGS -> supportFragmentManager.beginTransaction()
-                .replace(R.id.content_layout, LoginFragment.instance).commit()*/
+            /* ID_SETTINGS -> supportFragmentManager.beginTransaction()
+                 .replace(R.id.content_layout, LoginFragment.instance).commit()*/
         }
     }
 }

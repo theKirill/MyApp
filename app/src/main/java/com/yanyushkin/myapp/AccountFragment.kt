@@ -10,7 +10,7 @@ import com.yanyushkin.myapp.extensions.hide
 import com.yanyushkin.myapp.extensions.show
 import kotlinx.android.synthetic.main.fragment_account.*
 
-class AccountFragment: Fragment() {
+class AccountFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(R.layout.fragment_account, null)
@@ -18,18 +18,26 @@ class AccountFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initClickListenersForButtons()
+        setUserInfoForAccountLayout()
 
-        Firebase.mAuth.currentUser?.let{
+        initClickListenersForViews()
+    }
+
+    private fun setUserInfoForAccountLayout() {
+        Firebase.mAuth.currentUser?.let {
             no_account_layout.hide()
             account_layout.show()
             email_tv.text = Firebase.mAuth.currentUser!!.email.toString()
         }
     }
 
-    private fun initClickListenersForButtons(){
+    private fun initClickListenersForViews() {
         main_login_btn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_settingsFragment_to_loginActivity))
 
-        main_sign_btn.setOnClickListener (Navigation.createNavigateOnClickListener(R.id.action_settingsFragment_to_signInActivity))
+        main_sign_btn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_settingsFragment_to_signInActivity))
+
+        about_iv.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_settingsFragment_to_userInfoFragment))
+
+        account_layout.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_settingsFragment_to_userInfoFragment))
     }
 }
