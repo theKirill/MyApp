@@ -10,16 +10,18 @@ import kotlinx.android.synthetic.main.activity_main.*
  */
 class MainActivity : AppCompatActivity() {
 
-    private val SELECTED_TAB_KEY = "selected_tab"
-    private var selectedTab = 4
-
     /**
      * ID вкладок нижней навигации
      */
-    private val ID_HOME = 1
-    private val ID_MESSAGES = 2
-    private val ID_NOTIFICATIONS = 3
-    private val ID_SETTINGS = 4
+    companion object {
+        private const val ID_HOME = 1
+        private const val ID_MESSAGES = 2
+        private const val ID_NOTIFICATIONS = 3
+        private const val ID_SETTINGS = 4
+    }
+
+    private val SELECTED_TAB_KEY = "selected_tab"
+    private var selectedTab = 4
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

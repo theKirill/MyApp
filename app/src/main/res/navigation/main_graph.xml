@@ -10,7 +10,8 @@
         <action android:id="@+id/action_settingsFragment_to_loginActivity" app:destination="@id/loginActivity"
                 app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"/>
         <action android:id="@+id/action_settingsFragment_to_userInfoFragment"
-                app:destination="@+id/userInfoFragment2" app:enterAnim="@anim/slide_in_right"/>
+                app:destination="@+id/userInfoFragment2" app:enterAnim="@anim/slide_in_right"
+        />
     </fragment>
     <activity android:id="@+id/signInActivity" android:name="com.yanyushkin.myapp.SignInActivity"
               android:label="activity_signin" tools:layout="@layout/activity_signin"/>
@@ -18,7 +19,10 @@
               android:label="activity_login" tools:layout="@layout/activity_login"/>
     <fragment android:id="@+id/userInfoFragment2" android:name="com.yanyushkin.myapp.UserInfoFragment"
               android:label="UserInfoFragment">
-        <action android:id="@+id/action_userInfoFragment2_to_settingsFragment" app:destination="@id/settingsFragment"
+        <action android:id="@+id/action_userInfoFragment2_to_settingsFragment_ok" app:destination="@id/settingsFragment"
                 app:enterAnim="@anim/nav_default_enter_anim"/>
+        <action android:id="@+id/action_userInfoFragment2_to_settingsFragment_back"
+                app:destination="@id/settingsFragment" app:enterAnim="@anim/slide_in_left"
+        />
     </fragment>
 </navigation>

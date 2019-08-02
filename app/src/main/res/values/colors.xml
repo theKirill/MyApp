@@ -15,5 +15,5 @@
     <color name="colorGray">#90A4AE</color>
     <color name="colorOk">#2EC82A</color>
     <color name="colorError">#C82414</color>
-    <color name="colorTransparent">@android:color/transparent</color>
+    <color name="colorTransparent">#00000000</color>
 </resources>

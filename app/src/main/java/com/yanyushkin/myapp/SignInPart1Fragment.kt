@@ -26,13 +26,13 @@ class SignInPart1Fragment : Fragment(), SignInView {
     }
 
     companion object {
+        private const val ROTATION_KEY = "rotate"
         val instance: SignInPart1Fragment by lazy { Holder.INSTANCE }
     }
 
     @Inject
     lateinit var signInPresenter: SignInPart1Presenter
     private var isVisiblePassword = false
-    private val ROTATION_KEY = "rotate"
     private var rotate = false
 
     override fun onCreate(savedInstanceState: Bundle?) {

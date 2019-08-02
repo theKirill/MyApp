@@ -1,8 +1,10 @@
 package com.yanyushkin.myapp.presenters
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
 import com.yanyushkin.myapp.App
 import com.yanyushkin.myapp.Firebase
+import com.yanyushkin.myapp.toast
 import com.yanyushkin.myapp.views.LoginView
 import com.yanyushkin.myapp.views.View
 import javax.inject.Inject

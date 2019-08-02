@@ -3,8 +3,6 @@ package com.yanyushkin.myapp
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,13 +24,14 @@ class LoginFragment : Fragment(), LoginView {
     }
 
     companion object {
+        private const val SIGN_IN_CODE = 9001
+        private const val ROTATION_KEY = "rotate"
         val instance: LoginFragment by lazy { Holder.INSTANCE }
     }
 
     @Inject
     lateinit var loginPresenter: LoginPresenter
     private var isVisiblePassword = false
-    private val ROTATION_KEY = "rotate"
     private var rotate = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -112,24 +111,23 @@ class LoginFragment : Fragment(), LoginView {
     }
 
     private fun initViewsOptions() {
-        initClickListenerForLoginButton()
+        initClickListenerForLoginButtons()
         initFocusChangeListenerForPassET()
         initClickListenerForShowPassButton()
     }
 
-    private fun initClickListenerForLoginButton() {
+    private fun initClickListenerForLoginButtons() {
         login_btn.setOnClickListener {
             hideKeyboard(activity, login_btn)
             login_layout.requestFocus()
-            loginPresenter.logIn(email_et.text.toString(), password_et.text.toString())
-            //Navigation.findNavController(activity as Activity, R.id.auth_nav_host_fragment).navigate(R.id.action_loginFragment_to_settingsFragment)
-            /* fragmentManager!!.beginTransaction()
-                 .replace(R.id.content_layout, SettingsFragment.instance).commit()*/
 
-            /*login_layout.requestFocus()
-            hideKeyboard(activity)
+            val email = email_et.text.toString()
+            val password = password_et.text.toString()
 
-            */
+            if (email.isNotEmpty() && password.isNotEmpty())
+                loginPresenter.logIn(email, password)
+            else
+                toast(activity as Context, getString(R.string.warning_login_message))
         }
     }
 

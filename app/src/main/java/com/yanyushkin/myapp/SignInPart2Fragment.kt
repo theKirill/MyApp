@@ -26,14 +26,14 @@ class SignInPart2Fragment : Fragment(), SignInView {
     }
 
     companion object {
+        private const val ROTATION_KEY = "rotate"
+        private const val GALLERY_CODE_REQUEST = 1
         val instance: SignInPart2Fragment by lazy { Holder.INSTANCE }
     }
 
     @Inject
     lateinit var signInPresenter: SignInPart2Presenter
-    private val ROTATION_KEY = "rotate"
     private var rotate = false
-    private val GALLERY_CODE_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
