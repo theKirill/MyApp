@@ -15,6 +15,6 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             app:defaultNavHost="false"
-            app:navGraph="@navigation/signin_graph" />
+            app:navGraph="@navigation/signin_graph"/>
 
 </LinearLayout>

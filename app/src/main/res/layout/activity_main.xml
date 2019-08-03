@@ -15,7 +15,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             app:defaultNavHost="false"
-            app:navGraph="@navigation/main_graph" />
+            app:navGraph="@navigation/main_graph"/>
 
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
             android:id="@+id/bottomNavigation"

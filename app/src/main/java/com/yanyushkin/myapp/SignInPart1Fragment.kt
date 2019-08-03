@@ -107,7 +107,7 @@ class SignInPart1Fragment : Fragment(), SignInView {
 
     private fun initClickListenerForNextButton() {
         next_btn.setOnClickListener {
-            sign_layout.requestFocus()
+            sign_main_layout.requestFocus()
             hideKeyboard(activity, next_btn)
 
             signInPresenter.signIn(sign_email_et.text.toString(), sign_password_et.text.toString())

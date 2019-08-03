@@ -119,7 +119,7 @@ class LoginFragment : Fragment(), LoginView {
     private fun initClickListenerForLoginButtons() {
         login_btn.setOnClickListener {
             hideKeyboard(activity, login_btn)
-            login_layout.requestFocus()
+            login_main_layout.requestFocus()
 
             val email = email_et.text.toString()
             val password = password_et.text.toString()
