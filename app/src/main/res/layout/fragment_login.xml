@@ -83,7 +83,7 @@
             android:layout_centerHorizontal="true"
             style="@style/MainButton"
             android:background="@drawable/rounded_view"
-            app:spinning_bar_width="2dp"
+            app:spinning_bar_width="3dp"
             app:spinning_bar_color="@color/colorSpinningBar"
             app:spinning_bar_padding="6dp"/>
 

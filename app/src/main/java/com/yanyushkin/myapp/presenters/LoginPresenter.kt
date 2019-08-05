@@ -1,35 +1,47 @@
 package com.yanyushkin.myapp.presenters
 
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthException
-import com.yanyushkin.myapp.App
 import com.yanyushkin.myapp.Firebase
-import com.yanyushkin.myapp.toast
-import com.yanyushkin.myapp.views.LoginView
-import com.yanyushkin.myapp.views.View
-import javax.inject.Inject
+import com.yanyushkin.myapp.arch.LoginContract
 
-class LoginPresenter : Presenter {
+class LoginPresenter : LoginContract.Presenter {
 
-    private lateinit var loginView: LoginView
+    private lateinit var loginView: LoginContract.View
 
     /**
      * binding to view
      */
-    override fun attach(view: View) {
-        this.loginView = view as LoginView
+    override fun attach(view: LoginContract.View) {
+        this.loginView = view
     }
 
-    fun logIn(email: String, password: String) {
-        showProgress()
+    override fun logIn(email: String, password: String) {
+        loginView.hideKeyBoard()
 
-        Firebase.mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-            if (it.isSuccessful)
-                loginView.onLoginSuccessful()
-            else
-                loginView.onLoginError()
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            loginView.showProgress()
+
+            Firebase.mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+                if (it.isSuccessful)
+                    loginView.onLoginSuccessful()
+                else
+                    loginView.onLoginError()
+            }
+        } else {
+            loginView.onFillingFieldsError()
         }
     }
 
-    private fun showProgress(): Unit = loginView.showProgress()
+    override fun setVisibilityOfShowPassBtn(hasFocus: Boolean) {
+        if (hasFocus)
+            loginView.setVisibleShowPassBtn()
+        else
+            loginView.setInvisibleShowPassBtn()
+    }
+
+    override fun setVisibilityOfPass(isVisiblePassword: Boolean) {
+        if (isVisiblePassword)
+            loginView.setVisiblePassword()
+        else
+            loginView.setInvisiblePassword()
+    }
 }

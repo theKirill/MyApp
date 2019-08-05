@@ -1,14 +1,15 @@
-package com.yanyushkin.myapp
+package com.yanyushkin.myapp.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.yanyushkin.myapp.extensions.hide
-import com.yanyushkin.myapp.extensions.show
-import kotlinx.android.synthetic.main.fragment_account.*
+import com.yanyushkin.myapp.R
 
+/**
+ * Фрагмент общих настроек
+ */
 class SettingsFragment : Fragment() {
 
     private object Holder {
@@ -31,7 +32,18 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fragmentManager!!.beginTransaction().replace(R.id.account_info_layout, AccountFragment()).commit()
-        fragmentManager!!.beginTransaction().replace(R.id.preferences_layout, PreferencesFragment()).commit()
+        setLayouts()
+    }
+
+    private fun setLayouts() {
+        fragmentManager!!.beginTransaction().replace(
+            R.id.account_info_layout,
+            AccountFragment()
+        ).commit()
+
+        fragmentManager!!.beginTransaction().replace(
+            R.id.preferences_layout,
+            PreferencesFragment()
+        ).commit()
     }
 }

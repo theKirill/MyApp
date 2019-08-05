@@ -16,7 +16,7 @@
     <string name="error_login_message">Введён неверный пароль или такой учётной записи не существует!</string>
     <string name="warning_login_message">Заполните все поля!</string>
     <string name="welcome_message">Добро пожаловать!</string>
-    <string name="welcome_after_sign_message">Регистрация прошла успешно! Добро пожаловать!</string>
+    <string name="welcome_after_sign_message">Регистрация прошла успешно!\nДобро пожаловать!</string>
     <string name="themes_category_title_preference">Настройки темы</string>
     <string name="auto_daynight_title_preference">Автоматическая смена темы дня/ночи</string>
     <string name="auto_daynight_summary_preference">Тёмная тема включится автоматически ночью</string>
@@ -34,4 +34,5 @@
     <string name="email_text">Эл. адрес</string>
     <string name="name_text">Имя</string>
     <string name="sex_text">Пол</string>
+    <string name="error_message">Произошла непредвиденная ошибка</string>
 </resources>

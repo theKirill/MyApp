@@ -1,4 +1,4 @@
-package com.yanyushkin.myapp
+package com.yanyushkin.myapp.ui.fragments
 
 import android.app.Activity
 import android.content.Context
@@ -10,16 +10,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.yanyushkin.myapp.App
+import com.yanyushkin.myapp.R
+import com.yanyushkin.myapp.arch.SignInPart1Contract
 import com.yanyushkin.myapp.extensions.*
 import com.yanyushkin.myapp.presenters.SignInPart1Presenter
-import com.yanyushkin.myapp.views.SignInView
+import com.yanyushkin.myapp.toast
 import kotlinx.android.synthetic.main.fragment_signin.*
 import javax.inject.Inject
 
 /**
- * Фрагмент для ввода почты/пароля
+ * Фрагмент для ввода почты/пароля (регистрация)
  */
-class SignInPart1Fragment : Fragment(), SignInView {
+class SignInPart1Fragment : Fragment(), SignInPart1Contract.View {
 
     private object Holder {
         val INSTANCE = SignInPart1Fragment()
@@ -66,18 +69,101 @@ class SignInPart1Fragment : Fragment(), SignInView {
         outState.putBoolean(ROTATION_KEY, rotate)
     }
 
-    override fun onSignInSuccessful(): Unit =
-        Navigation.findNavController(activity as Activity, R.id.sign_nav_host_fragment)
-            .navigate(R.id.action_signInPart1Fragment_to_signInPart2Fragment)
+    override fun onSignInSuccessful() {
+        android.os.Handler().postDelayed({
+            Navigation.findNavController(activity as Activity, R.id.sign_nav_host_fragment)
+                .navigate(R.id.action_signInPart1Fragment_to_signInPart2Fragment)
+        }, 1000)
+    }
 
-    override fun onSignInError(): Unit = toast(activity as Context, getString(R.string.error_sign_message))
+    override fun onSignInError() {
+        next_btn.revertAnimation {
+            next_btn.background = resources.getDrawable(R.drawable.rounded_view, activity!!.theme)
+        }
+
+        toast(activity as Context, getString(R.string.error_sign_message))
+    }
+
+    override fun onFillingFieldsError(): Unit =
+        toast(activity as Context, getString(R.string.warning_login_message))
+
+    override fun hideKeyBoard() {
+        sign_main_layout.requestFocus()
+        hideKeyboard(activity, next_btn)
+    }
+
+    override fun onValidEmail() {
+        sign_email_done_iv.show()
+        sign_email_done_iv.setImageResource(R.drawable.ic_done)
+        sign_email_et.background = resources.getDrawable(R.drawable.ok_rounded_view, activity!!.theme)
+    }
+
+    override fun onInvalidEmail() {
+        sign_email_done_iv.show()
+        sign_email_done_iv.setImageResource(R.drawable.ic_error)
+        sign_email_et.background =
+            resources.getDrawable(R.drawable.error_rounded_view, activity!!.theme)
+    }
+
+    override fun onEmptyEmail() {
+        sign_email_done_iv.hide()
+        sign_email_et.background = resources.getDrawable(R.drawable.rounded_view, activity!!.theme)
+    }
+
+    override fun onValidPassword() {
+        sign_password_et.background = resources.getDrawable(R.drawable.ok_rounded_view, activity!!.theme)
+    }
+
+    override fun onInvalidPassword() {
+        sign_password_et.background =
+            resources.getDrawable(R.drawable.error_rounded_view, activity!!.theme)
+    }
+
+    override fun onEmptyPassword() {
+        sign_password_et.background = resources.getDrawable(R.drawable.rounded_view, activity!!.theme)
+    }
+
+    override fun setVisibleShowPassBtn() {
+        sign_show_password_btn.show()
+        sign_password_done_iv.hide()
+    }
+
+    override fun setInvisibleShowPassBtn() {
+        sign_show_password_btn.hide()
+    }
+
+    override fun showValidityOfPassword() {
+        sign_password_done_iv.show()
+        sign_password_done_iv.setImageResource(R.drawable.ic_done)
+    }
+
+    override fun showInvalidityOfPassword() {
+        sign_password_done_iv.show()
+        sign_password_done_iv.setImageResource(R.drawable.ic_error)
+        toast(
+            activity as Context,
+            resources.getString(R.string.info_password_message)
+        )
+    }
+
+    override fun setVisiblePassword() {
+        sign_password_et.showPassword()
+        isVisiblePassword = true
+    }
+
+    override fun setInvisiblePassword() {
+        sign_password_et.hidePassword()
+        isVisiblePassword = false
+    }
 
     override fun showProgress(): Unit = next_btn.startAnimation()
 
     private fun doAfterRotate(savedInstanceState: Bundle?) {
         savedInstanceState?.let {
             savedInstanceState.apply {
-                if (containsKey(ROTATION_KEY) && getBoolean(ROTATION_KEY)) {
+                if (containsKey(ROTATION_KEY) && getBoolean(
+                        ROTATION_KEY
+                    )) {
                     rotate = true
                     clear()
                 }
@@ -87,7 +173,6 @@ class SignInPart1Fragment : Fragment(), SignInView {
 
     private fun initAnimationForViews(views: ArrayList<View>) {
         var startOffset: Long = 0
-        next_btn.isEnabled = false
 
         views.forEach {
             it.animate(activity as Context, startOffset)
@@ -107,9 +192,6 @@ class SignInPart1Fragment : Fragment(), SignInView {
 
     private fun initClickListenerForNextButton() {
         next_btn.setOnClickListener {
-            sign_main_layout.requestFocus()
-            hideKeyboard(activity, next_btn)
-
             signInPresenter.signIn(sign_email_et.text.toString(), sign_password_et.text.toString())
         }
     }
@@ -117,22 +199,9 @@ class SignInPart1Fragment : Fragment(), SignInView {
     private fun initTextChangeListenerForEmailET() {
         sign_email_et.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if (isEmailValid(sign_email_et.text.toString())) {
-                    sign_email_done_iv.show()
-                    sign_email_done_iv.setImageResource(R.drawable.ic_done)
-                    sign_email_et.background = resources.getDrawable(R.drawable.ok_rounded_view, activity!!.theme)
-                    next_btn.isEnabled = isPasswordValid(sign_password_et.text.toString())
-                } else {
-                    if (sign_email_et.text!!.isEmpty()) {
-                        sign_email_done_iv.hide()
-                        sign_email_et.background = resources.getDrawable(R.drawable.rounded_view, activity!!.theme)
-                    } else {
-                        sign_email_done_iv.show()
-                        sign_email_done_iv.setImageResource(R.drawable.ic_error)
-                        sign_email_et.background =
-                            resources.getDrawable(R.drawable.error_rounded_view, activity!!.theme)
-                    }
-                }
+                val email = sign_email_et.text.toString()
+
+                signInPresenter.checkEmail(email)
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -144,16 +213,9 @@ class SignInPart1Fragment : Fragment(), SignInView {
     private fun initTextChangeListenerForPassET() {
         sign_password_et.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                if (isPasswordValid(sign_password_et.text.toString())) {
-                    sign_password_et.background = resources.getDrawable(R.drawable.ok_rounded_view, activity!!.theme)
-                    next_btn.isEnabled = isEmailValid(sign_email_et.text.toString())
-                } else {
-                    if (sign_password_et.text!!.isEmpty())
-                        sign_password_et.background = resources.getDrawable(R.drawable.rounded_view, activity!!.theme)
-                    else
-                        sign_password_et.background =
-                            resources.getDrawable(R.drawable.error_rounded_view, activity!!.theme)
-                }
+                val password = sign_password_et.text.toString()
+
+                signInPresenter.checkPassword(password)
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -164,39 +226,15 @@ class SignInPart1Fragment : Fragment(), SignInView {
 
     private fun initFocusChangeListenerForPassET() {
         sign_password_et.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                sign_show_password_btn.show()
-                sign_password_done_iv.hide()
-            } else {
-                sign_show_password_btn.hide()
+            val password = sign_password_et.text.toString()
 
-                if (sign_password_et.text!!.isNotEmpty()) {
-                    sign_password_done_iv.show()
-
-                    if (isPasswordValid(sign_password_et.text.toString())) {
-                        sign_password_done_iv.setImageResource(R.drawable.ic_done)
-                    } else {
-                        sign_password_done_iv.setImageResource(R.drawable.ic_error)
-                        toast(activity as Context, resources.getString(R.string.info_password_message))
-                    }
-                }
-            }
+            signInPresenter.setVisibilityOfShowPassBtn(hasFocus, password)
         }
     }
 
     private fun initClickListenerForShowPassButton() {
         sign_show_password_btn.setOnClickListener {
-            if (!isVisiblePassword) {
-                sign_password_et.showPassword()
-                isVisiblePassword = true
-            } else {
-                sign_password_et.hidePassword()
-                isVisiblePassword = false
-            }
+            signInPresenter.setVisibilityOfPass(isVisiblePassword)
         }
     }
-
-    private fun isEmailValid(email: String): Boolean = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-
-    private fun isPasswordValid(password: String): Boolean = password.length > 6
 }

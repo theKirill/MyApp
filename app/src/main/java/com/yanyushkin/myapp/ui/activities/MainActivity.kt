@@ -1,31 +1,42 @@
-package com.yanyushkin.myapp
+package com.yanyushkin.myapp.ui.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
+import com.yanyushkin.myapp.App
+import com.yanyushkin.myapp.R
+import com.yanyushkin.myapp.arch.MainActivityContract
+import com.yanyushkin.myapp.presenters.MainActivityPresenter
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 /**
  * Главная активити приложения
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainActivityContract.View {
 
-    /**
-     * ID вкладок нижней навигации
-     */
     companion object {
+        private val SELECTED_TAB_KEY = "selected_tab"
+
+        /**
+         * ID вкладок нижней навигации
+         */
         private const val ID_HOME = 1
         private const val ID_MESSAGES = 2
         private const val ID_NOTIFICATIONS = 3
         private const val ID_SETTINGS = 4
     }
 
-    private val SELECTED_TAB_KEY = "selected_tab"
+    @Inject
+    lateinit var mainActivityPresenter: MainActivityPresenter
     private var selectedTab = 4
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        App.component.injectsMainActivity(this)
+        mainActivityPresenter.attach(this)
 
         doAfterRotate(savedInstanceState)
         initBottomNavigation()
@@ -39,6 +50,16 @@ class MainActivity : AppCompatActivity() {
                 clear()
                 putInt(SELECTED_TAB_KEY, selectedTab)
             }
+        }
+    }
+
+    override fun showTab(id: Int) {
+        selectedTab = id
+
+        when (id) {
+            ID_NOTIFICATIONS -> bottomNavigation.setCount(ID_NOTIFICATIONS, "")
+            /* ID_SETTINGS -> supportFragmentManager.beginTransaction()
+                 .replace(R.id.content_layout, LoginFragment.instance).commit()*/
         }
     }
 
@@ -57,10 +78,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initBottomNavigation() {
-        bottomNavigation.add(MeowBottomNavigation.Model(ID_HOME, R.drawable.ic_home))
-        bottomNavigation.add(MeowBottomNavigation.Model(ID_MESSAGES, R.drawable.ic_messages))
-        bottomNavigation.add(MeowBottomNavigation.Model(ID_NOTIFICATIONS, R.drawable.ic_notifications))
-        bottomNavigation.add(MeowBottomNavigation.Model(ID_SETTINGS, R.drawable.ic_settings))
+        bottomNavigation.add(
+            MeowBottomNavigation.Model(
+                ID_HOME,
+                R.drawable.ic_home
+            )
+        )
+        bottomNavigation.add(
+            MeowBottomNavigation.Model(
+                ID_MESSAGES,
+                R.drawable.ic_messages
+            )
+        )
+        bottomNavigation.add(
+            MeowBottomNavigation.Model(
+                ID_NOTIFICATIONS,
+                R.drawable.ic_notifications
+            )
+        )
+        bottomNavigation.add(
+            MeowBottomNavigation.Model(
+                ID_SETTINGS,
+                R.drawable.ic_settings
+            )
+        )
         bottomNavigation.setCount(ID_NOTIFICATIONS, "10")
         bottomNavigation.show(selectedTab)
 
@@ -69,17 +110,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initClickListenerForBottomNavigation() {
         bottomNavigation.setOnClickMenuListener {
-            showTab(it.id)
-
-            selectedTab = it.id
-        }
-    }
-
-    private fun showTab(id: Int) {
-        when (id) {
-            ID_NOTIFICATIONS -> bottomNavigation.setCount(ID_NOTIFICATIONS, "")
-            /* ID_SETTINGS -> supportFragmentManager.beginTransaction()
-                 .replace(R.id.content_layout, LoginFragment.instance).commit()*/
+            mainActivityPresenter.showTab(it.id)
         }
     }
 }

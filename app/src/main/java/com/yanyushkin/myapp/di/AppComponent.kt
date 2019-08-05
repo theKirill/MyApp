@@ -1,10 +1,7 @@
 package com.yanyushkin.myapp.di
 
-import com.yanyushkin.myapp.LoginFragment
-import com.yanyushkin.myapp.SignInPart1Fragment
-import com.yanyushkin.myapp.SignInPart2Fragment
-import com.yanyushkin.myapp.presenters.LoginPresenter
-import com.yanyushkin.myapp.presenters.SignInPart2Presenter
+import com.yanyushkin.myapp.ui.activities.MainActivity
+import com.yanyushkin.myapp.ui.fragments.*
 import dagger.Component
 import javax.inject.Singleton
 
@@ -17,4 +14,10 @@ interface AppComponent {
     fun injectsSignInPart1Fragment(signInPart1Fragment: SignInPart1Fragment)
 
     fun injectsSignInPart2Fragment(signInPart2Fragment: SignInPart2Fragment)
+
+    fun injectsAccountFragment(accountFragment: AccountFragment)
+
+    fun injectsUserInfoFragment(userInfoFragment: UserInfoFragment)
+
+    fun injectsMainActivity(mainActivity: MainActivity)
 }

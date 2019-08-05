@@ -1,25 +1,30 @@
-package com.yanyushkin.myapp
+package com.yanyushkin.myapp.ui.fragments
 
+import android.annotation.TargetApi
 import android.app.Activity
-import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.yanyushkin.myapp.App
+import com.yanyushkin.myapp.R
+import com.yanyushkin.myapp.arch.SignInPart2Contract
 import com.yanyushkin.myapp.extensions.*
+import com.yanyushkin.myapp.getBitmap
 import com.yanyushkin.myapp.presenters.SignInPart2Presenter
-import com.yanyushkin.myapp.views.SignInView
+import com.yanyushkin.myapp.toast
 import kotlinx.android.synthetic.main.fragment_signin2.*
 import javax.inject.Inject
 
 /**
- * Фрагмент для ввода имени, загрузки фото профиля
+ * Фрагмент для ввода имени+пола, загрузки фото профиля (регистрация)
  */
-class SignInPart2Fragment : Fragment(), SignInView {
+class SignInPart2Fragment : Fragment(), SignInPart2Contract.View {
 
     private object Holder {
         val INSTANCE = SignInPart2Fragment()
@@ -53,7 +58,7 @@ class SignInPart2Fragment : Fragment(), SignInView {
         if (!rotate)
             initAnimationForViews(views)
 
-        initClickListenerForOkButton()
+        initClickListenersForViews()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -66,23 +71,67 @@ class SignInPart2Fragment : Fragment(), SignInView {
         outState.putBoolean(ROTATION_KEY, rotate)
     }
 
-    override fun onSignInSuccessful() {
-        Navigation.findNavController(activity as Activity, R.id.sign_nav_host_fragment)
-            .navigate(R.id.action_signInPart2Fragment_to_mainActivity2)
+    @TargetApi(Build.VERSION_CODES.M)
+    override fun onAddInfoSuccessful() {
+        sign_btn.doneLoadingAnimation(
+            resources.getColor(R.color.colorCompleteProgress, activity!!.theme),
+            getBitmap(activity as Context, R.drawable.complete)
+        )
 
-        toast(activity as Context, getString(R.string.welcome_after_sign_message))
+        android.os.Handler().postDelayed({
+            Navigation.findNavController(activity as Activity, R.id.sign_nav_host_fragment)
+                .navigate(R.id.action_signInPart2Fragment_to_mainActivity2)
+
+            toast(
+                activity as Context,
+                getString(R.string.welcome_after_sign_message)
+            )
+        }, 1000)
     }
 
-    override fun onSignInError() {
+    override fun onAddInfoError() {
 
     }
+
+    override fun hideKeyBoard() {
+        sign_part2_layout.requestFocus()
+        hideKeyboard(activity, sign_btn)
+    }
+
+    override fun openGallery() {
+        val photoPickerIntent = Intent(Intent.ACTION_PICK)
+        photoPickerIntent.type = "image/*"
+
+        startActivityForResult(
+            photoPickerIntent,
+            GALLERY_CODE_REQUEST
+        )
+    }
+
+    override fun setPhotoToIV(data: Intent?) {
+        val selectedPhoto = data!!.data
+
+        sign_photo_iv.setImageURI(selectedPhoto)
+    }
+
+    override fun showErrorWhenSettingPhoto(): Unit =
+        toast(activity as Context, getString(R.string.error_message))
 
     override fun showProgress(): Unit = sign_btn.startAnimation()
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        signInPresenter.setPhoto(requestCode, resultCode, data)
+    }
 
     private fun doAfterRotate(savedInstanceState: Bundle?) {
         savedInstanceState?.let {
             savedInstanceState.apply {
-                if (containsKey(ROTATION_KEY) && getBoolean(ROTATION_KEY)) {
+                if (containsKey(ROTATION_KEY) && getBoolean(
+                        ROTATION_KEY
+                    )
+                ) {
                     rotate = true
                     clear()
                 }
@@ -101,29 +150,13 @@ class SignInPart2Fragment : Fragment(), SignInView {
         rotate = false
     }
 
-    private fun initClickListenerForOkButton() {
-        sign_btn.setOnClickListener {
-            sign_part2_layout.requestFocus()
-            hideKeyboard(activity, sign_btn)
-
-            signInPresenter.addAdditionalInfoAboutUser()
-        }
-
+    private fun initClickListenersForViews() {
         sign_photo_iv.setOnClickListener {
-            val photoPickerIntent = Intent(Intent.ACTION_PICK)
-            photoPickerIntent.type = "image/*"
-
-            startActivityForResult(photoPickerIntent, GALLERY_CODE_REQUEST)
+            signInPresenter.choosePhoto()
         }
-    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == GALLERY_CODE_REQUEST && resultCode == RESULT_OK) {
-            val selectedPhoto = data!!.data
-
-            sign_photo_iv.setImageURI(selectedPhoto)
+        sign_btn.setOnClickListener {
+            signInPresenter.addAdditionalInfoAboutUser()
         }
     }
 }

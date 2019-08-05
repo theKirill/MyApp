@@ -1,8 +1,6 @@
 package com.yanyushkin.myapp.di
 
-import com.yanyushkin.myapp.presenters.LoginPresenter
-import com.yanyushkin.myapp.presenters.SignInPart1Presenter
-import com.yanyushkin.myapp.presenters.SignInPart2Presenter
+import com.yanyushkin.myapp.presenters.*
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -21,4 +19,16 @@ class PresentersModule {
     @Singleton
     @Provides
     fun provideSignInPart2Presenter(): SignInPart2Presenter = SignInPart2Presenter()
+
+    @Singleton
+    @Provides
+    fun provideAccountPresenter(): AccountPresenter = AccountPresenter()
+
+    @Singleton
+    @Provides
+    fun provideUserInfoPresenter(): UserInfoPresenter = UserInfoPresenter()
+
+    @Singleton
+    @Provides
+    fun provideMainActivityPresenter(): MainActivityPresenter = MainActivityPresenter()
 }

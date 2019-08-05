@@ -1,30 +1,36 @@
-package com.yanyushkin.myapp
+package com.yanyushkin.myapp.ui.fragments
 
+import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.yanyushkin.myapp.App
+import com.yanyushkin.myapp.R
+import com.yanyushkin.myapp.arch.LoginContract
 import com.yanyushkin.myapp.extensions.*
+import com.yanyushkin.myapp.getBitmap
 import com.yanyushkin.myapp.presenters.LoginPresenter
-import com.yanyushkin.myapp.views.LoginView
+import com.yanyushkin.myapp.toast
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
 /**
  * Фрагмент для ввода почты/пароля, входа в приложение
  */
-class LoginFragment : Fragment(), LoginView {
+class LoginFragment : Fragment(), LoginContract.View {
 
     private object Holder {
         val INSTANCE = LoginFragment()
     }
 
     companion object {
-        private const val SIGN_IN_CODE = 9001
         private const val ROTATION_KEY = "rotate"
         val instance: LoginFragment by lazy { Holder.INSTANCE }
     }
@@ -65,25 +71,56 @@ class LoginFragment : Fragment(), LoginView {
         outState.putBoolean(ROTATION_KEY, rotate)
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     override fun onLoginSuccessful() {
-        /*login_btn.doneLoadingAnimation(
-            R.color.colorCompleteProgress,
-            getBitmap(activity as Context, R.drawable.ic_complete)
-        )*/
+        login_btn.doneLoadingAnimation(
+            resources.getColor(R.color.colorCompleteProgress, activity!!.theme),
+            getBitmap(activity as Context, R.drawable.complete)
+        )
 
-        Navigation.findNavController(activity as Activity, R.id.login_nav_host_fragment)
-            .navigate(R.id.action_loginFragment_to_mainActivity)
+        android.os.Handler().postDelayed({
+            Navigation.findNavController(activity as Activity, R.id.login_nav_host_fragment)
+                .navigate(R.id.action_loginFragment_to_mainActivity)
 
-        toast(activity as Context, getString(R.string.welcome_message))
+            toast(activity as Context, getString(R.string.welcome_message))
+        }, 1000)
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     override fun onLoginError() {
-        /*login_btn.doneLoadingAnimation(
-            R.color.colorCompleteProgress,
-            getBitmap(activity as Context, R.drawable.ic_error_black)
-        )*/
+        login_btn.doneLoadingAnimation(
+            resources.getColor(R.color.colorError, activity!!.theme),
+            getBitmap(activity as Context, R.drawable.not_complete)
+        )
+
+        android.os.Handler().postDelayed({
+            login_btn.revertAnimation {
+                login_btn.background = resources.getDrawable(R.drawable.rounded_view, activity!!.theme)
+            }
+        }, 1000)
 
         toast(activity as Context, getString(R.string.error_login_message))
+    }
+
+    override fun onFillingFieldsError(): Unit = toast(activity as Context, getString(R.string.warning_login_message))
+
+    override fun hideKeyBoard() {
+        hideKeyboard(activity, login_btn)
+        login_main_layout.requestFocus()
+    }
+
+    override fun setVisibleShowPassBtn(): Unit = show_password_btn.show()
+
+    override fun setInvisibleShowPassBtn(): Unit = show_password_btn.hide()
+
+    override fun setVisiblePassword() {
+        password_et.showPassword()
+        isVisiblePassword = true
+    }
+
+    override fun setInvisiblePassword() {
+        password_et.hidePassword()
+        isVisiblePassword = false
     }
 
     override fun showProgress(): Unit = login_btn.startAnimation()
@@ -91,7 +128,10 @@ class LoginFragment : Fragment(), LoginView {
     private fun doAfterRotate(savedInstanceState: Bundle?) {
         savedInstanceState?.let {
             savedInstanceState.apply {
-                if (containsKey(ROTATION_KEY) && getBoolean(ROTATION_KEY)) {
+                if (containsKey(ROTATION_KEY) && getBoolean(
+                        ROTATION_KEY
+                    )
+                ) {
                     rotate = true
                     clear()
                 }
@@ -118,37 +158,22 @@ class LoginFragment : Fragment(), LoginView {
 
     private fun initClickListenerForLoginButtons() {
         login_btn.setOnClickListener {
-            hideKeyboard(activity, login_btn)
-            login_main_layout.requestFocus()
-
             val email = email_et.text.toString()
             val password = password_et.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty())
-                loginPresenter.logIn(email, password)
-            else
-                toast(activity as Context, getString(R.string.warning_login_message))
+            loginPresenter.logIn(email, password)
         }
     }
 
     private fun initFocusChangeListenerForPassET() {
         password_et.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus)
-                show_password_btn.show()
-            else
-                show_password_btn.hide()
+            loginPresenter.setVisibilityOfShowPassBtn(hasFocus)
         }
     }
 
     private fun initClickListenerForShowPassButton() {
         show_password_btn.setOnClickListener {
-            if (!isVisiblePassword) {
-                password_et.showPassword()
-                isVisiblePassword = true
-            } else {
-                password_et.hidePassword()
-                isVisiblePassword = false
-            }
+            loginPresenter.setVisibilityOfPass(isVisiblePassword)
         }
     }
 }

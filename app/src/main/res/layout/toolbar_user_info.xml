@@ -8,7 +8,7 @@
         android:id="@+id/user_info_toolbar"
         android:background="@color/colorTransparent"
         app:contentInsetStart="0dp"
-        tools:context=".MainActivity">
+        tools:context=".ui.activities.MainActivity">
 
     <RelativeLayout
             android:id="@+id/buttons_layout"
