@@ -10,7 +10,7 @@ interface SignInPart1Contract {
 
         fun onSignInError()
 
-        fun onError()
+        fun onError(message: String)
 
         fun onFillingFieldsError()
 

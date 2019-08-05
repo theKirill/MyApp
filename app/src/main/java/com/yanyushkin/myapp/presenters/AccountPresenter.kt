@@ -17,10 +17,12 @@ class AccountPresenter : AccountContract.Presenter {
 
     override fun checkUserAvailability(firebaseUser: FirebaseUser?) {
         firebaseUser?.let {
-            if (firebaseUser.isEmailVerified)
+            if (firebaseUser.isEmailVerified) {
                 accountView.showAccount(Firebase.mAuth.currentUser!!.email.toString())
-            else
+            } else {
+                Firebase.mAuth.signOut()
                 accountView.dontShowAccount()
+            }
         }
     }
 }

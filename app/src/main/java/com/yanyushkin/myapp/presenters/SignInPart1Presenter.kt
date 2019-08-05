@@ -88,7 +88,7 @@ class SignInPart1Presenter : SignInPart1Contract.Presenter {
             if (it.isSuccessful)
                 signInView.verifyEmail()
             else
-                signInView.onError()
+                signInView.onError(it.exception!!.message.toString())
         }
     }
 }

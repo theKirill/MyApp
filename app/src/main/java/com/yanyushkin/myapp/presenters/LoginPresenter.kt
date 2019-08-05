@@ -35,6 +35,18 @@ class LoginPresenter : LoginContract.Presenter {
         }
     }
 
+    override fun recoverPassword(email: String) {
+        if (email.isNotEmpty())
+            Firebase.mAuth.sendPasswordResetEmail(email).addOnCompleteListener {
+                if (it.isSuccessful)
+                    loginView.showMessageForRecoverPassword()
+                else
+                    loginView.onError(it.exception!!.message.toString())
+            }
+        else
+            loginView.onEmptyEmail()
+    }
+
     override fun setVisibilityOfShowPassBtn(hasFocus: Boolean) {
         if (hasFocus)
             loginView.setVisibleShowPassBtn()
@@ -43,7 +55,7 @@ class LoginPresenter : LoginContract.Presenter {
     }
 
     override fun setVisibilityOfPass(isVisiblePassword: Boolean) {
-        if (isVisiblePassword)
+        if (!isVisiblePassword)
             loginView.setVisiblePassword()
         else
             loginView.setInvisiblePassword()

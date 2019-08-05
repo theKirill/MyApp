@@ -90,6 +90,8 @@ class LoginFragment : Fragment(), LoginContract.View {
         toast(activity as Context, getString(R.string.error_login_message))
     }
 
+    override fun onError(message: String): Unit = toast(activity as Context, message)
+
     override fun onEmailNotVerified() {
         showErrorButton()
 
@@ -116,6 +118,11 @@ class LoginFragment : Fragment(), LoginContract.View {
         password_et.hidePassword()
         isVisiblePassword = false
     }
+
+    override fun onEmptyEmail(): Unit = toast(activity as Context, getString(R.string.empty_email_warning_message))
+
+    override fun showMessageForRecoverPassword(): Unit =
+        toast(activity as Context, getString(R.string.recover_password_warning_message))
 
     override fun showProgress(): Unit = login_btn.startAnimation()
 
@@ -145,17 +152,23 @@ class LoginFragment : Fragment(), LoginContract.View {
     }
 
     private fun initViewsOptions() {
-        initClickListenerForLoginButtons()
+        initClickListenerForButtons()
         initFocusChangeListenerForPassET()
         initClickListenerForShowPassButton()
     }
 
-    private fun initClickListenerForLoginButtons() {
+    private fun initClickListenerForButtons() {
         login_btn.setOnClickListener {
             val email = email_et.text.toString()
             val password = password_et.text.toString()
 
             loginPresenter.logIn(email, password)
+        }
+
+        forgot_password_btn.setOnClickListener {
+            val email = email_et.text.toString()
+
+            loginPresenter.recoverPassword(email)
         }
     }
 

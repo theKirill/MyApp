@@ -42,7 +42,7 @@ class UserInfoFragment : Fragment(), UserInfoContract.View {
     }
 
     override fun showSettingsFragment(): Unit =
-        Navigation.findNavController(activity as Activity, R.id.main_nav_host_fragment)
+        Navigation.findNavController(activity as Activity, R.id.user_info_nav_host_fragment)
             .navigate(R.id.action_userInfoFragment_to_mainActivity_ok)
 
     private fun initClickListenerForButtons() {

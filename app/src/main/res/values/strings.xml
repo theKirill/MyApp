@@ -37,4 +37,6 @@
     <string name="error_message">Произошла непредвиденная ошибка</string>
     <string name="email_verify_message">На вашу почту было отправлено письмо для подтверждения регистрации!</string>
     <string name="email_verify_warning_message">Для входа в приложения необходимо подтвердить регистрацию.\nЗайдите на свою почту!</string>
+    <string name="recover_password_warning_message">На вашу почту было отправлено письмо для сброса пароля!</string>
+    <string name="empty_email_warning_message">Для восстановления пароля введите адрес электронной почты!</string>
 </resources>

@@ -42,7 +42,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="8dp"
                     app:civ_border_width="2dp"
-                    app:civ_border_color="@color/colorPrimary"/>
+                    app:civ_border_color="@color/colorAccent"/>
 
             <info.hoang8f.android.segmented.SegmentedGroup
                     xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
@@ -53,7 +53,7 @@
                     android:layout_gravity="center_horizontal"
                     segmentedgroup:sc_border_width="2dp"
                     segmentedgroup:sc_corner_radius="10dp"
-                    segmentedgroup:sc_tint_color="@color/colorPrimary">
+                    segmentedgroup:sc_tint_color="@color/colorAccent">
 
                 <RadioButton
                         android:id="@+id/male_radiobutton"

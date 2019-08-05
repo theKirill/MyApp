@@ -10,6 +10,8 @@ interface LoginContract {
 
         fun onLoginError()
 
+        fun onError(message: String)
+
         fun onEmailNotVerified()
 
         fun onFillingFieldsError()
@@ -23,6 +25,10 @@ interface LoginContract {
         fun setVisiblePassword()
 
         fun setInvisiblePassword()
+
+        fun onEmptyEmail()
+
+        fun showMessageForRecoverPassword()
     }
 
     interface Presenter {
@@ -30,6 +36,8 @@ interface LoginContract {
         fun attach(view: View)
 
         fun logIn(email: String, password: String)
+
+        fun recoverPassword(email: String)
 
         fun setVisibilityOfShowPassBtn(hasFocus: Boolean)
 

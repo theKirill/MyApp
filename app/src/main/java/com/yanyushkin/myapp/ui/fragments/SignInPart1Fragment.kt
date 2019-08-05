@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.yanyushkin.myapp.App
-import com.yanyushkin.myapp.Firebase
 import com.yanyushkin.myapp.R
 import com.yanyushkin.myapp.arch.SignInPart1Contract
 import com.yanyushkin.myapp.extensions.*
@@ -85,7 +84,7 @@ class SignInPart1Fragment : Fragment(), SignInPart1Contract.View {
         toast(activity as Context, getString(R.string.error_sign_message))
     }
 
-    override fun onError(): Unit = toast(activity as Context, getString(R.string.error_message))
+    override fun onError(message: String): Unit = toast(activity as Context, message)
 
     override fun onFillingFieldsError(): Unit = toast(activity as Context, getString(R.string.warning_login_message))
 
@@ -96,7 +95,7 @@ class SignInPart1Fragment : Fragment(), SignInPart1Contract.View {
 
     override fun onValidEmail() {
         sign_email_done_iv.show()
-        sign_email_done_iv.setImageResource(R.drawable.ic_done)
+        sign_email_done_iv.setImageResource(R.drawable.ic_done_green)
         sign_email_et.background = resources.getDrawable(R.drawable.ok_rounded_view, activity!!.theme)
     }
 
@@ -138,7 +137,7 @@ class SignInPart1Fragment : Fragment(), SignInPart1Contract.View {
 
     override fun showValidityOfPassword() {
         sign_password_done_iv.show()
-        sign_password_done_iv.setImageResource(R.drawable.ic_done)
+        sign_password_done_iv.setImageResource(R.drawable.ic_done_green)
     }
 
     override fun showInvalidityOfPassword() {
