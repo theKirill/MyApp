@@ -10,6 +10,8 @@ interface SignInPart1Contract {
 
         fun onSignInError()
 
+        fun onError()
+
         fun onFillingFieldsError()
 
         fun hideKeyBoard()
@@ -25,6 +27,8 @@ interface SignInPart1Contract {
         fun onInvalidPassword()
 
         fun onEmptyPassword()
+
+        fun verifyEmail()
 
         fun setVisibleShowPassBtn()
 

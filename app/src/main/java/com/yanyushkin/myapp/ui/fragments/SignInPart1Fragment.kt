@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.yanyushkin.myapp.App
+import com.yanyushkin.myapp.Firebase
 import com.yanyushkin.myapp.R
 import com.yanyushkin.myapp.arch.SignInPart1Contract
 import com.yanyushkin.myapp.extensions.*
@@ -84,8 +85,9 @@ class SignInPart1Fragment : Fragment(), SignInPart1Contract.View {
         toast(activity as Context, getString(R.string.error_sign_message))
     }
 
-    override fun onFillingFieldsError(): Unit =
-        toast(activity as Context, getString(R.string.warning_login_message))
+    override fun onError(): Unit = toast(activity as Context, getString(R.string.error_message))
+
+    override fun onFillingFieldsError(): Unit = toast(activity as Context, getString(R.string.warning_login_message))
 
     override fun hideKeyBoard() {
         sign_main_layout.requestFocus()
@@ -122,6 +124,8 @@ class SignInPart1Fragment : Fragment(), SignInPart1Contract.View {
     override fun onEmptyPassword() {
         sign_password_et.background = resources.getDrawable(R.drawable.rounded_view, activity!!.theme)
     }
+
+    override fun verifyEmail(): Unit = toast(activity as Context, getString(R.string.email_verify_message))
 
     override fun setVisibleShowPassBtn() {
         sign_show_password_btn.show()
@@ -163,7 +167,8 @@ class SignInPart1Fragment : Fragment(), SignInPart1Contract.View {
             savedInstanceState.apply {
                 if (containsKey(ROTATION_KEY) && getBoolean(
                         ROTATION_KEY
-                    )) {
+                    )
+                ) {
                     rotate = true
                     clear()
                 }

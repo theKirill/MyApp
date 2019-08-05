@@ -35,4 +35,6 @@
     <string name="name_text">Имя</string>
     <string name="sex_text">Пол</string>
     <string name="error_message">Произошла непредвиденная ошибка</string>
+    <string name="email_verify_message">На вашу почту было отправлено письмо для подтверждения регистрации!</string>
+    <string name="email_verify_warning_message">Для входа в приложения необходимо подтвердить регистрацию.\nЗайдите на свою почту!</string>
 </resources>

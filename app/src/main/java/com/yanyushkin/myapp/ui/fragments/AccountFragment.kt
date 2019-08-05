@@ -1,5 +1,6 @@
 package com.yanyushkin.myapp.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.yanyushkin.myapp.arch.AccountContract
 import com.yanyushkin.myapp.extensions.hide
 import com.yanyushkin.myapp.extensions.show
 import com.yanyushkin.myapp.presenters.AccountPresenter
+import com.yanyushkin.myapp.toast
 import kotlinx.android.synthetic.main.fragment_account.*
 import javax.inject.Inject
 
@@ -49,6 +51,9 @@ class AccountFragment : Fragment(), AccountContract.View {
         account_layout.show()
         email_tv.text = email
     }
+
+    override fun dontShowAccount(): Unit =
+        toast(activity as Context, resources.getString(R.string.email_verify_warning_message))
 
     private fun initClickListenersForViews() {
         main_login_btn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_settingsFragment_to_loginActivity))

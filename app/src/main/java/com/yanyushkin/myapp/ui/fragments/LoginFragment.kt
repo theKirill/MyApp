@@ -73,10 +73,7 @@ class LoginFragment : Fragment(), LoginContract.View {
 
     @TargetApi(Build.VERSION_CODES.M)
     override fun onLoginSuccessful() {
-        login_btn.doneLoadingAnimation(
-            resources.getColor(R.color.colorCompleteProgress, activity!!.theme),
-            getBitmap(activity as Context, R.drawable.complete)
-        )
+        showOkButton()
 
         android.os.Handler().postDelayed({
             Navigation.findNavController(activity as Activity, R.id.login_nav_host_fragment)
@@ -88,18 +85,15 @@ class LoginFragment : Fragment(), LoginContract.View {
 
     @TargetApi(Build.VERSION_CODES.M)
     override fun onLoginError() {
-        login_btn.doneLoadingAnimation(
-            resources.getColor(R.color.colorError, activity!!.theme),
-            getBitmap(activity as Context, R.drawable.not_complete)
-        )
-
-        android.os.Handler().postDelayed({
-            login_btn.revertAnimation {
-                login_btn.background = resources.getDrawable(R.drawable.rounded_view, activity!!.theme)
-            }
-        }, 1000)
+        showErrorButton()
 
         toast(activity as Context, getString(R.string.error_login_message))
+    }
+
+    override fun onEmailNotVerified() {
+        showErrorButton()
+
+        toast(activity as Context, resources.getString(R.string.email_verify_warning_message))
     }
 
     override fun onFillingFieldsError(): Unit = toast(activity as Context, getString(R.string.warning_login_message))
@@ -175,5 +169,27 @@ class LoginFragment : Fragment(), LoginContract.View {
         show_password_btn.setOnClickListener {
             loginPresenter.setVisibilityOfPass(isVisiblePassword)
         }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private fun showOkButton() {
+        login_btn.doneLoadingAnimation(
+            resources.getColor(R.color.colorCompleteProgress, activity!!.theme),
+            getBitmap(activity as Context, R.drawable.complete)
+        )
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private fun showErrorButton() {
+        login_btn.doneLoadingAnimation(
+            resources.getColor(R.color.colorError, activity!!.theme),
+            getBitmap(activity as Context, R.drawable.not_complete)
+        )
+
+        android.os.Handler().postDelayed({
+            login_btn.revertAnimation {
+                login_btn.background = resources.getDrawable(R.drawable.rounded_view, activity!!.theme)
+            }
+        }, 1000)
     }
 }

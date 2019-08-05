@@ -7,6 +7,8 @@ interface AccountContract {
     interface View {
 
         fun showAccount(email: String)
+
+        fun dontShowAccount()
     }
 
     interface Presenter {

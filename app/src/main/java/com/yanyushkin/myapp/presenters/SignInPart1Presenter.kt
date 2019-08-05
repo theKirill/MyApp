@@ -21,9 +21,10 @@ class SignInPart1Presenter : SignInPart1Contract.Presenter {
             signInView.showProgress()
 
             Firebase.mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-                if (it.isSuccessful)
+                if (it.isSuccessful) {
+                    verifyEmail()
                     signInView.onSignInSuccessful()
-                else
+                } else
                     signInView.onSignInError()
             }
         } else {
@@ -81,4 +82,13 @@ class SignInPart1Presenter : SignInPart1Contract.Presenter {
     private fun isValidEmail(email: String): Boolean = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
     private fun isValidPassword(password: String): Boolean = password.length > 6
+
+    private fun verifyEmail() {
+        Firebase.mAuth.currentUser!!.sendEmailVerification().addOnCompleteListener {
+            if (it.isSuccessful)
+                signInView.verifyEmail()
+            else
+                signInView.onError()
+        }
+    }
 }

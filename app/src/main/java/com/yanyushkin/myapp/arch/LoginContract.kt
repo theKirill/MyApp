@@ -10,6 +10,8 @@ interface LoginContract {
 
         fun onLoginError()
 
+        fun onEmailNotVerified()
+
         fun onFillingFieldsError()
 
         fun hideKeyBoard()

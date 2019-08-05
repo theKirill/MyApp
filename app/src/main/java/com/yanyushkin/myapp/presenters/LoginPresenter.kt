@@ -21,10 +21,14 @@ class LoginPresenter : LoginContract.Presenter {
             loginView.showProgress()
 
             Firebase.mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-                if (it.isSuccessful)
-                    loginView.onLoginSuccessful()
-                else
+                if (it.isSuccessful) {
+                    if (Firebase.mAuth.currentUser!!.isEmailVerified)
+                        loginView.onLoginSuccessful()
+                    else
+                        loginView.onEmailNotVerified()
+                } else {
                     loginView.onLoginError()
+                }
             }
         } else {
             loginView.onFillingFieldsError()
