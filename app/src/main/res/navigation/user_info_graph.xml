@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/user_info_graph" app:startDestination="@id/userInfoFragment">
+
+    <activity android:id="@+id/mainActivity" android:name="com.yanyushkin.myapp.ui.activities.MainActivity"
+              android:label="activity_main" tools:layout="@layout/activity_main"/>
+    <fragment android:id="@+id/userInfoFragment" android:name="com.yanyushkin.myapp.ui.fragments.UserInfoFragment"
+              android:label="UserInfoFragment">
+        <action android:id="@+id/action_userInfoFragment_to_mainActivity_back" app:destination="@id/mainActivity"
+                app:enterAnim="@anim/slide_in_left"/>
+        <action android:id="@+id/action_userInfoFragment_to_mainActivity_ok" app:destination="@id/mainActivity"
+                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"/>
+    </fragment>
+</navigation>

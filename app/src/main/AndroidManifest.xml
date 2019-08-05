@@ -18,6 +18,9 @@
         <activity android:name=".ui.activities.SignInActivity"
                   android:windowSoftInputMode="adjustResize|stateHidden">
         </activity>
+        <activity android:name=".ui.activities.UserInfoActivity"
+                  android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
         <activity android:name=".ui.activities.MainActivity"
                   android:windowSoftInputMode="adjustResize|stateHidden">
             <intent-filter>

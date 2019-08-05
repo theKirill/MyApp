@@ -5,7 +5,8 @@
 
     <fragment android:id="@+id/loginFragment" android:name="com.yanyushkin.myapp.ui.fragments.LoginFragment"
               android:label="LoginFragment">
-        <action android:id="@+id/action_loginFragment_to_mainActivity" app:destination="@id/mainActivity"/>
+        <action android:id="@+id/action_loginFragment_to_mainActivity" app:destination="@id/mainActivity"
+                app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"/>
     </fragment>
     <activity android:id="@+id/mainActivity" android:name="com.yanyushkin.myapp.ui.activities.MainActivity"
               android:label="activity_main" tools:layout="@layout/activity_main"/>

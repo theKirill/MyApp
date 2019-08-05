@@ -43,12 +43,12 @@ class UserInfoFragment : Fragment(), UserInfoContract.View {
 
     override fun showSettingsFragment(): Unit =
         Navigation.findNavController(activity as Activity, R.id.main_nav_host_fragment)
-            .navigate(R.id.action_userInfoFragment2_to_settingsFragment_ok)
+            .navigate(R.id.action_userInfoFragment_to_mainActivity_ok)
 
     private fun initClickListenerForButtons() {
-        back_btn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_userInfoFragment2_to_settingsFragment_back))
+        back_btn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_userInfoFragment_to_mainActivity_back))
 
-        ok_btn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_userInfoFragment2_to_settingsFragment_ok))
+        ok_btn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_userInfoFragment_to_mainActivity_ok))
 
         user_logout_btn.setOnClickListener {
             userInfoPresenter.logout()

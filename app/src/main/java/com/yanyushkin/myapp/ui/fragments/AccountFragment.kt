@@ -55,8 +55,8 @@ class AccountFragment : Fragment(), AccountContract.View {
 
         main_sign_btn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_settingsFragment_to_signInActivity))
 
-        about_iv.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_settingsFragment_to_userInfoFragment))
+        about_iv.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_settingsFragment_to_userInfoActivity))
 
-        account_layout.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_settingsFragment_to_userInfoFragment))
+        account_layout.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_settingsFragment_to_userInfoActivity))
     }
 }
